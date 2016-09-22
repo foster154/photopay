@@ -1,17 +1,15 @@
-// https://github.com/gaearon/react-hot-boilerplate/blob/master/server.js
+// https://www.youtube.com/watch?v=Ru3Rj_hM8bo&feature=youtu.be
 
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+const express = require('express');
+const path = require('path');
+const port = process.env.PORT || 8080;
+const app = express();
 
-new WebpackDevServer(webpack(config), {
-  publicPath: config.output.publicPath,
-  hot: true,
-  historyApiFallback: true
-}).listen(8080, '0.0.0.0', function (err, result) {
-  if (err) {
-    return console.log(err);
-  }
+app.use(express.static(__dirname));
 
-  console.log('Listening at http://0.0.0.0:8080/');
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'index.html'));
 });
+
+app.listen(port);
+console.log('Server started on port', port);

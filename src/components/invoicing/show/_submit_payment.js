@@ -3,24 +3,9 @@ import { connect } from 'react-redux';
 import Universals from '../../universal_styles';
 import StripeCheckout from 'react-stripe-checkout';
 import * as actions from '../../../actions';
-import { 
-  API_URL,
-  STRIPE_PUBLISHABLE_KEY,
-} from '../../../../config.js'; 
+// import { STRIPE_PUBLISHABLE_KEY } from '../../../../config.js'; 
 
 class SubmitPayment extends Component {
-  
-  
-  // onToken = (token) => {
-  //   //const chargeURL = `${API_URL}/invoices/57c207e0a98173774f3328bb/charge`;
-  //   const chargeURL = `${API_URL}/invoices/57c207e0a98173774f3328bb/charge`;
-  //   fetch(chargeURL, {
-  //     method: 'POST',
-  //     body: JSON.stringify(token),
-  //   }).then(token => {
-  //     alert(`We are in business, ${token.email}`);
-  //   });
-  // }
   
   onToken(token) {
     this.props.createCharge(token, this.props.invoice._id);
@@ -50,7 +35,7 @@ class SubmitPayment extends Component {
         <StripeCheckout
           invoiceId={invoice._id}
           token={this.onToken.bind(this)}
-          stripeKey={STRIPE_PUBLISHABLE_KEY}
+          stripeKey={process.env.STRIPE_PUBLISHABLE_KEY}
           amount={invoice.amount * 100}
           name={invoice.billFrom.name}
           description={invoice.description}

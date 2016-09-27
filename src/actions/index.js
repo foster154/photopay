@@ -31,7 +31,7 @@ export function signinUser({ email, password }) {
       .catch(() => {
         // request is bad...
         // - show an error to the user
-        dispatch(authError('Bad Login Info'));
+        dispatch(authError('Incorrect email/password. Please try again.'));
       });
   }
 }

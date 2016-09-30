@@ -24,6 +24,12 @@ module.exports = {
     contentBase: './'
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env':{
+        'NODE_ENV': JSON.stringify('development'),
+        'STRIPE_PUBLISHABLE_KEY': JSON.stringify('pk_test_ytV814lZralEMSiDXYjESlg1')
+      }
+    }),
     new webpack.HotModuleReplacementPlugin()
   ]
 }

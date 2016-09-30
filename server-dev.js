@@ -1,9 +1,4 @@
-// This is no longer being used!!! (see package.json => "dev"). 
-// Remove when I'm sure it's no longer needed.
-
 // https://github.com/gaearon/react-hot-boilerplate/blob/master/server.js
-
-
 
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Universals from '../../universal_styles';
 import StripeCheckout from 'react-stripe-checkout';
 import * as actions from '../../../actions';
-// import { STRIPE_PUBLISHABLE_KEY } from '../../../../config.js'; 
 
 class SubmitPayment extends Component {
   
@@ -36,9 +35,9 @@ class SubmitPayment extends Component {
           invoiceId={invoice._id}
           token={this.onToken.bind(this)}
           stripeKey={process.env.STRIPE_PUBLISHABLE_KEY}
-          amount={invoice.amount * 100}
+          amount={invoice.lineItems[0].amount * 100}
           name={invoice.billFrom.name}
-          description={invoice.description}
+          description={invoice.lineItems[0].item}
         >
         <button style={s.btn}>
           Submit Payment & Access Photos

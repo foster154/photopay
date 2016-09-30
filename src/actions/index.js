@@ -119,6 +119,10 @@ export function createInvoice({
             name: customer.name,
             email: customer.email
           },
+          billFrom: {
+            name: "Panoractives",
+            email: "info@panoractives.com"
+          },
           lineItems: [
             { item, amount }
           ],
@@ -161,6 +165,7 @@ export function createCharge(token, id) {
       data: JSON.stringify(token),
     })
     .then(response => {
+      console.log(response);
       dispatch({
         type: CREATE_CHARGE,
         payload: response.data

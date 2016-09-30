@@ -59,12 +59,12 @@ const LineItems = (props) => {
       <div style={styles.sectionTitle}>Invoice Detail</div>
       <div style={styles.label}>{dateFormat(props.invoice.date, "d mmm yyyy")}</div>
       <div style={styles.lineItem}>
-        <div style={styles.description}>{props.invoice.description}</div>
-        <div style={styles.amount}>${props.invoice.amount}</div>
+        <div style={styles.description}>{props.invoice.lineItems[0].item}</div>
+        <div style={styles.amount}>${props.invoice.lineItems[0].amount}</div>
       </div>
       <div style={styles.clear}></div>
       <div style={styles.totalWrapper}>
-        <span style={styles.totalDue}>TOTAL DUE: ${props.invoice.amount}</span>
+        <span style={styles.totalDue}>TOTAL DUE: ${props.invoice.lineItems[0].amount}</span>
       </div>
     </div>
   );

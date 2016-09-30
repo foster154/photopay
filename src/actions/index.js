@@ -107,9 +107,6 @@ export function createInvoice({
     paid,
   }) {
   return function(dispatch) {
-    // axios.post(`${API_URL}/invoices`, {description, amount}, {
-    //   headers: { authorization: localStorage.getItem('token') }
-    // })
     axios({
       method: 'post',
       url: `${API_URL}/invoices`,

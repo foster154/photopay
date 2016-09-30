@@ -10,6 +10,7 @@ import Radium from 'radium';
 class InvoiceList extends Component {
   componentWillMount() {
     this.props.fetchInvoices();
+    console.log(this.props.invoices);
   }
   
   handlePreviewClick(invoiceId) {
@@ -49,24 +50,27 @@ class InvoiceList extends Component {
       }
     }
     
-    return this.props.invoices.map((invoice) => {
-      return (
-        <tr style={s.row} key={invoice._id}>
-          <td>{dateFormat(invoice.date, "m/d/yy")}</td>
-          <td>{invoice.billTo ? invoice.billTo.name : ""}</td>
-          <td style={s.descriptionCol}>{invoice.description}</td>
-          <td>${invoice.amount}</td>
-          <td>
-            {invoice.paid ? 
-              <span style={s.paidText} className="fa fa-usd"></span> : 
-              <span style={s.unpaidText} className="fa fa-usd"></span> }
-          </td>
-          <td>
-            <Link  style={s.button} to={"/invoices/" + invoice._id} target="_blank">Preview</Link>
-          </td>
-        </tr>
-      );
-    });
+    if (this.props.invoices.length > 0) {
+      return this.props.invoices.map((invoice) => {
+        return (
+          <tr style={s.row} key={invoice._id}>
+            <td>{dateFormat(invoice.date, "m/d/yy")}</td>
+            <td>{invoice.billTo ? invoice.billTo.name : ""}</td>
+            <td style={s.descriptionCol}>{invoice.lineItems[0].item}</td>
+            <td>${invoice.lineItems[0].amount}</td>
+            <td>
+              {invoice.paid ? 
+                <span style={s.paidText} className="fa fa-usd"></span> : 
+                <span style={s.unpaidText} className="fa fa-usd"></span> }
+            </td>
+            <td>
+              <Link  style={s.button} to={"/invoices/" + invoice._id} target="_blank">Preview</Link>
+            </td>
+          </tr>
+        );
+      });
+    }
+
   }
   
   render() {

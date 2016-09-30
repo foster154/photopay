@@ -97,7 +97,15 @@ export function fetchInvoices() {
   }
 }
 
-export function createInvoice({description, amount}) {
+export function createInvoice({ 
+    invoiceNumber, 
+    customer,
+    item, 
+    amount, 
+    shareLink,
+    displayShareLinkImmediately,
+    paid,
+  }) {
   return function(dispatch) {
     // axios.post(`${API_URL}/invoices`, {description, amount}, {
     //   headers: { authorization: localStorage.getItem('token') }
@@ -105,7 +113,21 @@ export function createInvoice({description, amount}) {
     axios({
       method: 'post',
       url: `${API_URL}/invoices`,
-      data: { description, amount },
+      data: { 
+          invoiceNumber, 
+          billTo: {
+            name: customer.name,
+            email: customer.email
+          },
+          lineItems: [
+            { item, amount }
+          ],
+          shareLink,
+          invoiceSettings: {
+            displayShareLinkImmediately: displayShareLinkImmediately || false,
+          },
+          paid: paid || false,
+        },
       headers: { authorization: localStorage.getItem('token') }
     })
     .then(response => {
@@ -113,6 +135,7 @@ export function createInvoice({description, amount}) {
         type: CREATE_INVOICE,
         payload: response.data
       });
+      browserHistory.push('/invoices');
     });
   }
 }

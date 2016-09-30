@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import reduxThunk from 'redux-thunk';
 
@@ -13,12 +13,17 @@ import Signout from './components/auth/signout';
 import Welcome from './components/welcome';
 import Invoices from './components/invoicing/list/invoices';
 import InvoiceShow from './components/invoicing/show/invoice_show';
-import NewInvoice from './components/invoicing/detail/new';
+import NewInvoice from './components/invoicing/detail/new_invoice';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
 
-const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
-const store = createStoreWithMiddleware(reducers);
+//const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+//const store = createStoreWithMiddleware(reducers);
+
+let store = createStore(reducers, compose(
+  applyMiddleware(reduxThunk),
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+));
 
 const token = localStorage.getItem('token');
 // If a token exists, consider the user to be signed in.

@@ -9,3 +9,6 @@ export const FETCH_INVOICES = 'fetch_invoices';
 export const FETCH_INVOICE = 'fetch_invoice';
 export const CREATE_INVOICE = 'create_invoice';
 export const CREATE_CHARGE = 'create_charge';
+
+// Customers
+export const FETCH_CUSTOMERS = 'fetch_customers';

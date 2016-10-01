@@ -5,6 +5,7 @@ import dateFormat from 'dateformat';
 import { Link } from 'react-router';
 import Universals from '../../universal_styles';
 import Radium from 'radium';
+import EmailButton from './_email_button';
 
 @Radium
 class InvoiceList extends Component {
@@ -66,6 +67,9 @@ class InvoiceList extends Component {
             <td>
               <Link  style={s.button} to={"/invoices/" + invoice._id} target="_blank">Preview</Link>
             </td>
+            <td>
+              <EmailButton invoice={invoice} />
+            </td>
           </tr>
         );
       });
@@ -99,7 +103,8 @@ class InvoiceList extends Component {
             <th style={s.descriptionHeader}>Description</th>
             <th>Amount</th>
             <th>Paid</th>
-            <th>Preview</th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>

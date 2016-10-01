@@ -30,10 +30,12 @@ const LineItems = (props) => {
       fontWeight: '300'
     },
     description: {
-      float: 'left'
+      float: 'left',
+      width: '80%',
     },
     amount: {
-      float: 'right'
+      float: 'right',
+      width: '19%'
     },
     clear: {
       clear: 'both',
@@ -50,7 +52,7 @@ const LineItems = (props) => {
       borderColor: Universals.accentColor,
       fontWeight: '700',
       fontSize: '18px',
-      color: Universals.dkGrey
+      color: Universals.dkGrey,
     }
   }
   
@@ -64,7 +66,7 @@ const LineItems = (props) => {
       </div>
       <div style={styles.clear}></div>
       <div style={styles.totalWrapper}>
-        <span style={styles.totalDue}>TOTAL DUE: ${props.invoice.lineItems[0].amount}</span>
+        <span style={styles.totalDue}>TOTAL DUE: ${props.invoice.paid ? "0" : props.invoice.lineItems[0].amount}</span>
       </div>
     </div>
   );

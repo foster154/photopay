@@ -18,15 +18,17 @@ class InvoiceShow extends Component {
     // Styles
     const styles = {
       background: {
-        backgroundColor: '#E5E5E5',
         width: '100%',
         height: '100%',
         minHeight: '100vh',
         paddingTop: '30',
-        paddingBottom: '30'
+        paddingBottom: '30',
+        background: 'url("/img/house-background.jpg") no-repeat center center fixed',
+        backgroundSize: 'cover',
       },
       contentWrapper: {
         backgroundColor: '#fff',
+        border: '1px solid #e4e2e2',
         width: '600',
         maxWidth: '100%',
         margin: '0 auto 30px',
@@ -41,7 +43,7 @@ class InvoiceShow extends Component {
           <CompanyInfo invoice={invoice} />
           <LineItems invoice={invoice} />
           <SubmitPayment invoice={invoice} />
-          <HowItWorks invoice={invoice} />
+          {/* <HowItWorks invoice={invoice} /> */}
         </div>
       );
     } else if (invoice.paid === true) {

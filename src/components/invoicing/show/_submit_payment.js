@@ -27,6 +27,15 @@ class SubmitPayment extends Component {
         border: 'none',
         color: 'white',
       },
+      howItWorksText: {
+        marginTop: '10px',
+        fontWeight: '400',
+        fontSize: '14px',
+        textAlign: 'center',
+        width: '360px',
+        maxWidth: '90%',
+        margin: '10px auto 30px',
+      }
     }
     
     return (
@@ -43,6 +52,10 @@ class SubmitPayment extends Component {
           Submit Payment & Access Photos
         </button>
         </StripeCheckout>
+        
+        
+        <div style={s.howItWorksText}>(You'll receive access to the entire photo collection immediately after payment has been made.)</div>
+        
       </div>
     );
   }

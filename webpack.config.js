@@ -25,7 +25,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env':{
         'NODE_ENV': JSON.stringify('production'),
-        'STRIPE_PUBLISHABLE_KEY': JSON.stringify('pk_test_ytV814lZralEMSiDXYjESlg1'),
+        'STRIPE_PUBLISHABLE_KEY': JSON.stringify('pk_live_WMZQXK9Q5hrvzQdVqK3SB5DV'),
       }
     }),
     new webpack.optimize.UglifyJsPlugin({

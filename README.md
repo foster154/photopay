@@ -1,4 +1,4 @@
-# PhotoPay Web App
+# Photo Invoice
 
 Dead simple invoicing for photographers. Get paid on time, every time.
 

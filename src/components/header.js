@@ -74,7 +74,7 @@ class Header extends Component {
         
         <ul style={s.ul}>
           <li style={s.logoLi}>
-            <Link to="/" style={s.logoText}>PhotoPay</Link>
+            <Link to="/" style={s.logoText}>Photo Invoice</Link>
           </li>
           {this.renderLinks()}
         </ul>

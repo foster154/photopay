@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 import Radium from 'radium';
 import Universals from '../universal_styles';
@@ -27,7 +27,7 @@ class Signin extends Component {
   }
   
   render() {
-    const { handleSubmit, fields: { email, password }} = this.props;
+    const { handleSubmit } = this.props;
     
     const s = {
       background: {
@@ -94,14 +94,14 @@ class Signin extends Component {
             <h2 style={s.signinText}>Sign In</h2>
             {this.renderAlert()}
             <fieldset>
-              <label>Email:</label>
-              <input style={s.input} {...email} />
+              <label htmlFor="email">Email:</label>
+              <Field style={s.input} name="email" component="input" type="input" />
             </fieldset>
             <fieldset>
-              <label>Password:</label>
-              <input style={s.input} {...password} type="password" />
+              <label htmlFor="password">Password:</label>
+              <Field style={s.input} name="password" component="input" type="password" />
             </fieldset>
-            <button style={s.button} action="submit">Sign In</button>
+            <button style={s.button} type="submit">Sign In</button>
             <div style={{clear: "both"}}></div>
           </form>
           
@@ -117,5 +117,4 @@ function mapStateToProps(state) {
 
 export default reduxForm({
   form: 'signin',
-  fields: ['email', 'password']
 }, mapStateToProps, actions)(Signin);

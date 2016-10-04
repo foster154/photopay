@@ -5,10 +5,10 @@ import invoicesReducer from './invoices_reducer';
 import customersReducer from './customers_reducer';
 
 const rootReducer = combineReducers({
-  form,
   auth: authReducer,
   invoicing: invoicesReducer,
   customers: customersReducer,
+  form: formReducer,
 });
 
 export default rootReducer;

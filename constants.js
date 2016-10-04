@@ -1,1 +1,1 @@
-export const API_URL = process.env.NODE_ENV === "production" ? 'http://api.photoinvoice.com' : 'http://localhost:3000';
+export const API_URL = process.env.NODE_ENV === "production" ? 'https://api.photoinvoice.com' : 'http://localhost:3000';

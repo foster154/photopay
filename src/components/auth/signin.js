@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import Radium from 'radium';
 import Universals from '../universal_styles';
 
+const form = reduxForm({
+  form: 'Signin'
+});
+
 @Radium
 class Signin extends Component {
-  handleFormSubmit({ email, password }) {
-    console.log(email, password);
-    this.props.signinUser({ email, password });
+  
+  handleFormSubmit(formProps) {
+    this.props.signinUser(formProps);
   }
   
   renderAlert() {
-    
-    const s = {
-      msgRed: Universals.msgRed
-    }
-    
+    const s = { msgRed: Universals.msgRed }
     if (this.props.errorMessage) {
       return (
         <div style={s.msgRed}>
@@ -27,7 +28,6 @@ class Signin extends Component {
   }
   
   render() {
-    const { handleSubmit } = this.props;
     
     const s = {
       background: {
@@ -55,7 +55,7 @@ class Signin extends Component {
         }
       },
       form: {
-        width: '600',
+        width: '600px',
         maxWidth: '96%',
         backgroundColor: Universals.whiteBg,
         margin: '0 auto',
@@ -85,6 +85,8 @@ class Signin extends Component {
       }
     }
     
+    const { handleSubmit } = this.props;
+    
     return (
       <div style={s.background}>
         <div style={s.overlay}>
@@ -101,7 +103,7 @@ class Signin extends Component {
               <label htmlFor="password">Password:</label>
               <Field style={s.input} name="password" component="input" type="password" />
             </fieldset>
-            <button style={s.button} type="submit">Sign In</button>
+            <button style={s.button} action="submit">Sign In</button>
             <div style={{clear: "both"}}></div>
           </form>
           
@@ -115,6 +117,6 @@ function mapStateToProps(state) {
   return { errorMessage: state.auth.error };
 }
 
-export default reduxForm({
-  form: 'signin',
-}, mapStateToProps, actions)(Signin);
+export default connect(mapStateToProps, actions)(form(Signin));
+
+

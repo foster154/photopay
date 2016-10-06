@@ -98,14 +98,24 @@ export function fetchInvoices() {
 }
 
 export function createInvoice({ 
-    invoiceNumber, 
-    customer,
+    customerName,
+    customerEmail,
+    invoiceNumber,
     item, 
     amount, 
     shareLink,
     displayShareLinkImmediately,
     paid,
   }) {
+  console.log("Action creator params:", 
+  customerName,
+  customerEmail,
+  invoiceNumber, 
+  item, 
+  amount, 
+  shareLink,
+  displayShareLinkImmediately,
+  paid );
   return function(dispatch) {
     axios({
       method: 'post',
@@ -113,8 +123,8 @@ export function createInvoice({
       data: { 
           invoiceNumber, 
           billTo: {
-            name: customer.name,
-            email: customer.email
+            name: customerName,
+            email: customerEmail,
           },
           billFrom: {
             name: "Panoractives",

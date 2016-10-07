@@ -22,6 +22,7 @@ class InvoiceList extends Component {
         return (
           <tr style={s.row} key={invoice._id}>
             <td>{dateFormat(invoice.date, "m/d/yy")}</td>
+            <td>{invoice.invoiceNumber ? invoice.invoiceNumber : ""}</td>
             <td>{invoice.billTo ? invoice.billTo.name : ""}</td>
             <td style={s.descriptionCol}>{invoice.lineItems[0].item}</td>
             <td>${(invoice.lineItems[0].amount).toFixed(2)}</td>
@@ -55,6 +56,7 @@ class InvoiceList extends Component {
         <thead style={s.thead}>
           <tr>
             <th>Date</th>
+            <th>Invoice #</th>
             <th>Company</th>
             <th style={s.descriptionHeader}>Description</th>
             <th>Amount</th>

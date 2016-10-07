@@ -7,7 +7,8 @@ import { fetchCustomers } from '../../../actions/customers';
 import Universals from '../../universal_styles';
 import Radium from 'radium';
 import Select from 'react-select';
-import CustomerSelect from './customer_select';
+import CustomerSelect from './_customer_select';
+import { normalizeShareUrl } from './_normalize_share_url';
 
 @Radium
 class CreateInvoice extends Component {
@@ -17,13 +18,16 @@ class CreateInvoice extends Component {
   }
   
   handleFormSubmit(formProps) {
+    
+    const validShareUrl = normalizeShareUrl(formProps.shareUrl);
+    
     const expandedFormProps = {
       customerName: this.props.customerList[formProps.customer - 1].name,
       customerEmail: this.props.customerList[formProps.customer - 1].email,
       invoiceNumber: formProps.invoiceNumber,
       item: formProps.item,
       amount: formProps.amount,
-      shareLink: formProps.shareLink,
+      shareUrl: validShareUrl,
       displayShareLinkImmediately: formProps.displayShareLinkImmediately,
       paid: formProps.paid,
     };
@@ -42,12 +46,10 @@ class CreateInvoice extends Component {
     
     const { hasCustomerValue, customerValue, handleSubmit } = this.props;
       
-    //let customerOptions = [ "<option></option>", ];
     let customerOptions = [ {} ];
       
     if (this.props.customerList.length > 0) {
       customerOptions = this.props.customerList.map(function(customer, index) {
-        //return <option key={index} value={index}>{customer.name}</option>
         return { value: index + 1, label: customer.name }
       });
       console.log("customerOptions", customerOptions);
@@ -63,10 +65,6 @@ class CreateInvoice extends Component {
         <div className="clearfix">
           <fieldset style={s.customerField}>
             <label htmlFor="customer" style={s.label}>Customer:</label>
-            {/* <Field name="customer" component="select" style={s.custInput}>
-              <option key="-1" value="">Please Select</option>
-              {customerOptions}
-            </Field> */}
             <Field
               name="customer"
               component={props =>
@@ -82,10 +80,6 @@ class CreateInvoice extends Component {
             <label htmlFor="invoiceNumber" style={s.label}>Invoice #:</label>
             <Field style={s.textInput} name="invoiceNumber" component="input" type="input" />
           </fieldset>
-          {hasCustomerValue && <fieldset style={s.customerField}>
-            <label htmlFor="customerEmail" style={s.label}>Customer Email:</label>
-            <Field name="customerEmail" component="input" style={s.textInput} />
-          </fieldset>}
         </div>
 
         <h2 style={{textAlign: 'center'}}>Items</h2>
@@ -109,7 +103,7 @@ class CreateInvoice extends Component {
         <h2 style={{textAlign: 'center'}}>After Payment Has Been Received</h2>
         <fieldset>
           <label style={s.label}>Share This Link:</label>
-          <Field style={s.textInput} name="shareLink" component="input" type="input" />
+          <Field style={s.textInput} name="shareUrl" component="input" type="input" />
         </fieldset>
         <fieldset>
           <Field name="displayShareLinkImmediately" component="input" type="checkbox"/>
@@ -127,40 +121,15 @@ class CreateInvoice extends Component {
   }
 }
 
-// function mapStateToProps(state) {
-//   return { customerList: state.customers.customerList };
-// }
+function mapStateToProps(state) {
+  return { customerList: state.customers.customerList };
+}
 
-// const form = reduxForm({
-//   form: 'createInvoice'
-// });
+const form = reduxForm({
+  form: 'createInvoice'
+});
 
-//export default connect(mapStateToProps, { createInvoice, fetchCustomers })(form(CreateInvoice))
-
-// BEGIN REDUX COPIED CODE
-
-// Decorate with redux-form
-CreateInvoice = reduxForm({
-  form: 'createInvoice'  // a unique identifier for this form
-})(CreateInvoice)
-
-// Decorate with connect to read form values
-const selector = formValueSelector('createInvoice') // <-- same as form name
-CreateInvoice = connect(
-  state => {
-    // can select values individually
-    const hasCustomerValue = selector(state, 'customerName')
-    return {
-      hasCustomerValue,
-      customerList: state.customers.customerList
-    }
-  },
-  { createInvoice, fetchCustomers }
-)(CreateInvoice)
-
-export default CreateInvoice
-
-// END REDUX COPIED CODE
+export default connect(mapStateToProps, { createInvoice, fetchCustomers })(form(CreateInvoice))
 
 // Styles
 const s = {

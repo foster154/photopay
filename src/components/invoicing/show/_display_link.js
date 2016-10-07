@@ -36,7 +36,8 @@ const DisplayLink = (props) => {
       <div style={s.howItWorks}>
         <div style={s.sectionTitle}>Thank You!</div>
         <div style={s.sectionText}>
-          <a style={s.link} href={props.invoice.shareLink}>Click here to access the photos</a>.
+          Your photos can be accessed here:<br />
+          <a style={s.link} href={props.invoice.shareUrl}>{props.invoice.shareUrl}</a>
         </div>
       </div>
     </div>

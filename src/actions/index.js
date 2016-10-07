@@ -103,7 +103,7 @@ export function createInvoice({
     invoiceNumber,
     item, 
     amount, 
-    shareLink,
+    shareUrl,
     displayShareLinkImmediately,
     paid,
   }) {
@@ -113,7 +113,7 @@ export function createInvoice({
   invoiceNumber, 
   item, 
   amount, 
-  shareLink,
+  shareUrl,
   displayShareLinkImmediately,
   paid );
   return function(dispatch) {
@@ -133,7 +133,7 @@ export function createInvoice({
           lineItems: [
             { item, amount }
           ],
-          shareLink,
+          shareUrl,
           invoiceSettings: {
             displayShareLinkImmediately: displayShareLinkImmediately || false,
           },

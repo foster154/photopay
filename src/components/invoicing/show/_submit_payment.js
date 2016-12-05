@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Universals from '../../universal_styles';
 import StripeCheckout from 'react-stripe-checkout';
 import * as actions from '../../../actions';
+require('../../../styles/invoicing/show.scss');
 
 class SubmitPayment extends Component {
   
@@ -14,32 +14,8 @@ class SubmitPayment extends Component {
     
     const invoice = this.props.invoice;
     
-    const s = {
-      btnWrapper: {
-        textAlign: 'center',
-        marginTop: '12px'
-      },
-      btn: {
-        width: '360',
-        maxWidth: '90%',
-        backgroundColor: Universals.accentColor,
-        padding: '30px',
-        border: 'none',
-        color: 'white',
-      },
-      howItWorksText: {
-        marginTop: '10px',
-        fontWeight: '400',
-        fontSize: '14px',
-        textAlign: 'center',
-        width: '360px',
-        maxWidth: '90%',
-        margin: '10px auto 30px',
-      }
-    }
-    
     return (
-      <div style={s.btnWrapper}>
+      <div className="submit-payment-wrapper">
         <StripeCheckout
           invoiceId={invoice._id}
           token={this.onToken.bind(this)}
@@ -48,14 +24,12 @@ class SubmitPayment extends Component {
           name={invoice.billFrom.name}
           description={invoice.lineItems[0].item}
         >
-        <button style={s.btn}>
+        <button>
           Submit Payment & Access Photos
         </button>
         </StripeCheckout>
-        
-        
-        <div style={s.howItWorksText}>(You'll receive access to the entire photo collection immediately after payment has been made.)</div>
-        
+      
+        <div className="text">(You'll receive access to the entire photo collection immediately after payment has been made.)</div>
       </div>
     );
   }

@@ -1,0 +1,23 @@
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 1.8em;
+}
+
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+
+.float-right { float: right; }
+.float-left { float: left; }
+
+.msg-red {
+  width: 100%;
+  background-color: rgba(251, 87, 87, 0.46);
+  border: 1px solid #cc0000;
+  border-radius: 3px;
+  padding: 8px 10px;
+  margin-bottom: 15px;
+}

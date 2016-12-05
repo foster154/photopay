@@ -1,43 +1,16 @@
 import React from 'react';
-import Universals from '../../universal_styles';
 import { Link } from 'react-router';
+require('../../../styles/invoicing/show.scss');
 
 const DisplayLink = (props) => {
   
-  // styles
-  const s = {
-    howItWorks: {
-      borderTop: '1px solid #9a9a9a',
-      backgroundColor: Universals.accentColor,
-      marginTop: '45px',
-      padding: '20px'
-    },
-    sectionTitle: {
-      color: 'white',
-      textAlign: 'center',
-      textTransform: 'uppercase',
-      fontSize: '14px',
-      fontWeight: '700'
-    },
-    sectionText: {
-      marginTop: '20px',
-      fontWeight: '300',
-      fontSize: '17px',
-      textAlign: 'center',
-      color: 'white',
-    },
-    link: {
-      color: 'white',
-    }
-  }
-  
   return (
     <div>
-      <div style={s.howItWorks}>
-        <div style={s.sectionTitle}>Thank You!</div>
-        <div style={s.sectionText}>
+      <div className="display-link-wrapper">
+        <div className="title">Thank You!</div>
+        <div className="text">
           Your photos can be accessed here:<br />
-          <a style={s.link} href={props.invoice.shareUrl}>{props.invoice.shareUrl}</a>
+          <a href={props.invoice.shareUrl}>{props.invoice.shareUrl}</a>
         </div>
       </div>
     </div>

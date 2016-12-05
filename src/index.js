@@ -17,6 +17,9 @@ import CreateInvoice from './components/invoicing/detail/create_invoice';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
 
+// Styles
+require('./styles/main.scss');
+
 //const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 //const store = createStoreWithMiddleware(reducers);
 

@@ -1,0 +1,139 @@
+@import '../variables';
+
+.invoice-show-background {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background: url("/img/house-background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  
+  .invoice-show-content {
+    background-color: #fff;
+    border: 1px solid #e4e2e2;
+    width: 600px;
+    max-width: 100%;
+    margin: 0 auto 30px;
+    box-shadow: 0 10px 6px -6px rgba(0,0,0,0.2);
+    
+    .company-info-wrapper {
+      padding: 30px;
+      
+      .label {
+        font-weight: 700;
+        font-size: 12px;
+        color: $dkGrey;
+      }
+      
+      .name {
+        font-size: 24px;
+        color: $medGrey;
+      }
+      
+      .info {
+        font-size: 13px;
+        font-weight: 300;
+        color: $medGrey;
+      }
+    }
+    
+    .line-items-wrapper {
+      clear: both;
+      margin-top: 85px;
+      padding: 30px;
+      
+      .title {
+        color: $accentColor;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .label {
+        font-weight: 700;
+        font-size: 12px;
+        color: $dkGrey;
+        margin-top: 20px;
+      }
+      .line-item {
+        margin-top: 4px;
+        color: $dkGrey;
+        font-size: 20px;
+        font-weight: 300;
+        .description {
+          float: left;
+          width: 80%;
+        }
+        .amount {
+          float: right;
+          text-align: right;
+          width: 19%;
+        }
+      }
+      .total-wrapper {
+        text-align: center;
+        margin-top: 40px;
+        .total-due {
+          display: inline-block;
+          padding: 14px 20px;
+          border-width: 1px;
+          border-style: solid;
+          border-color: $accentColor;
+          font-weight: 700;
+          font-size: 18px;
+          color: $dkGrey;
+        }
+      }
+    }
+    
+    .submit-payment-wrapper {
+      text-align: center;
+      margin-top: 12px;
+      button {
+        width: 360px;
+        max-width: 90%;
+        background-color: $accentColor;
+        padding: 30px;
+        border: none;
+        color: white;
+      }
+      .text {
+        margin-top: 10px;
+        font-weight: 400;
+        font-size: 14px;
+        text-align: center;
+        width: 360px;
+        max-width: 90%;
+        margin: 10px auto 30px;
+      }
+    }
+    
+    .display-link-wrapper {
+      border-top: 1px solid #9a9a9a;
+      background-color: $accentColor;
+      margin-top: 45px;
+      padding: 20px;
+      
+      .title {
+        color: white;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: 70;
+      }
+      
+      .text {
+        margin-top: 20px;
+        font-weight: 300;
+        font-size: 17px;
+        text-align: center;
+        color: white;
+        
+        a {
+          color: white;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+@import './variables';
+
+nav.main-nav {
+  height: 80px;
+  box-shadow: 0 1px 5px rgba(0,0,0,.45);
+  
+  ul {
+    margin: 0;
+    width: 100%;
+    height: 80px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    
+    li {
+      color: $accentColor;
+      text-decoration: none;
+      margin-right: 50px;
+      font-weight: 400;
+    }
+    
+    .logo {
+      flex: 1;
+      
+      .logo-text {
+        text-decoration: none;
+        color: $accentColor;
+        font-size: 32px;
+        font-weight: 600;
+      }
+    }
+  }
+}

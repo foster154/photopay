@@ -1,0 +1,80 @@
+@import '../variables';
+
+.invoices-wrapper {
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+  
+  .new-invoice-btn {
+    position: absolute;
+    display: inline-block;
+    right: 0;
+    border: 1px solid $accentColor;
+    border-radius: 5px;
+    padding: 12px 20px;
+    color: $accentColor;
+    font-size: 16px;
+    text-decoration: none;
+    margin: 10px 0;
+  }
+  
+  h1 {
+    text-align: center;
+    clear: both;
+    margin: 35px 0;
+  }
+  
+  table.invoices-table {
+    font-size: 18px;
+    width: 100%;
+    
+    thead {
+      color: $dkGrey;
+      border-bottom: 1px solid $dkGrey;
+    }
+    
+    tbody {
+      tr {
+        text-align: center;
+        height: 60px;
+        border-bottom: 1px solid #ccc;
+      }
+      tr:hover {
+        background-color: #efefef;
+        cursor: pointer;
+      }
+    }
+    
+    .paid {
+      color: #07d007;
+    }
+    .unpaid {
+      color: #ccc;
+    }
+    
+    .preview-btn {
+      background-color: $accentColor;
+    }
+    
+    .email-btn {
+      background-color: #eeb200;
+    }
+    
+    .invoice-list-btn {
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 16px;
+      text-decoration: none;
+      margin: 0 auto;
+      padding: 4px 10px;
+    }
+    
+    .loading-graphic {
+      text-align: center;
+      height: 220px;
+      font-size: 40px;
+    }
+  }
+}
+

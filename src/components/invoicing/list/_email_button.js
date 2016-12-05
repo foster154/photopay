@@ -1,22 +1,8 @@
 import React, { Component } from 'react';
 import Universals from '../../universal_styles';
 import { Link } from 'react-router';
-import Radium from 'radium';
 
 const EmailButton = (props) => {
-  
-  const s = {
-    button: {
-      border: "none",
-      backgroundColor: '#eeb200',
-      borderRadius: "5px",
-      padding: "4px 10px",
-      color: "white",
-      fontSize: "16px",
-      margin: '0 auto',
-      textDecoration: 'none',
-    }
-  }
 
   const invoice = props.invoice;
   const invoiceURL = `http://photopay.herokuapp.com/invoices/${invoice._id}`;
@@ -36,9 +22,8 @@ const EmailButton = (props) => {
     "&body=" +
     encodeURI(emailBody);
     
-
   return (
-    <Link style={s.button} to={mailCode} target="_blank">Send Email</Link>
+    <Link className="invoice-list-btn email-btn" to={mailCode} target="_blank">Send Email</Link>
   );
 }
 

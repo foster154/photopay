@@ -16,11 +16,15 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-jquery": "^2.0.0",
+    "css-loader": "^0.26.0",
     "jquery": "^2.2.1",
     "jsdom": "^8.1.0",
     "mocha": "^2.4.5",
+    "node-sass": "^3.13.0",
     "react-addons-test-utils": "^15.3.2",
-    "react-hot-loader": "^3.0.0-beta.4"
+    "react-hot-loader": "^3.0.0-beta.4",
+    "sass-loader": "^4.0.2",
+    "style-loader": "^0.13.1"
   },
   "dependencies": {
     "axios": "^0.13.1",
@@ -33,7 +37,6 @@
     "dateformat": "^1.0.12",
     "express": "^4.14.0",
     "lodash": "^3.10.1",
-    "radium": "^0.18.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.0.0",

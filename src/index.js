@@ -49,4 +49,4 @@ ReactDOM.render(
       <Route path="/invoices/:id" component={InvoiceShow} />
     </Router>
   </Provider>
-  , document.querySelector('.container'));
+  , document.querySelector('#root'));

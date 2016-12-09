@@ -1,4 +1,4 @@
-import { API_URL } from '../../constants.js';
+import { API_URL } from './../constants.js';
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 import { 

@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { createInvoice } from '../../../actions'
 import { fetchCustomers } from '../../../actions/customers'
-import CustomerSelect from './_customer_select'
+import CustomerSelect from './CustomerSelect'
 import { normalizeShareUrl } from './_normalize_share_url'
 require('../../../styles/invoicing/form.scss')
 

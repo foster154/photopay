@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { createInvoice } from '../../../actions'
@@ -124,11 +124,11 @@ const form = reduxForm({
 })
 
 CreateInvoice.propTypes = {
-  customerList: React.PropTypes.array,      // mapStateToProps
-  errorMessage: React.PropTypes.string,     // ?
-  handleSubmit: React.PropTypes.func,
-  fetchCustomers: React.PropTypes.func,     // Redux action creator
-  createInvoice: React.PropTypes.func       // Redux action creator
+  customerList: PropTypes.array,      // mapStateToProps
+  errorMessage: PropTypes.string,     // ?
+  handleSubmit: PropTypes.func,       // Redux form
+  fetchCustomers: PropTypes.func,     // Redux action creator
+  createInvoice: PropTypes.func       // Redux action creator
 }
 
 export default connect(mapStateToProps, { createInvoice, fetchCustomers })(form(CreateInvoice))

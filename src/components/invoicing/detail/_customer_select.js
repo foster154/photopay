@@ -2,23 +2,36 @@ import React, {Component, PropTypes} from 'react'
 import Select from 'react-select'
 
 class CustomerSelect extends Component {
-  onChange(event) {
+  constructor (props) {
+    super(props)
+
+    this.onChange = this.onChange.bind(this)
+  }
+
+  onChange (event) {
     if (this.props.input.onChange) {
-      this.props.input.onChange(event.value); // <-- To be aligned with how redux-form publishes its CHANGE action payload. The event received is an object with 2 keys: "value" and "label"
+      // To align with how redux-form publishes its CHANGE action payload.
+      // The event received is an object with 2 keys: "value" and "label"
+      this.props.input.onChange(event.value)
     }
   }
 
-  render() {
+  render () {
     return (
       <Select
         {...this.props}
         value={this.props.input.value || ''}
         onBlur={() => this.props.input.onBlur(this.props.input.value)}
-        onChange={this.onChange.bind(this)}
+        onChange={this.onChange}
         options={this.props.options} // <-- Receive options from the form
       />
-    );
+    )
   }
+}
+
+CustomerSelect.propTypes = {
+  input: PropTypes.object,        // from redux-form (?)
+  options: PropTypes.array        // from component declaration
 }
 
 export default CustomerSelect

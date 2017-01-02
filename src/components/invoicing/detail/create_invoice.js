@@ -8,6 +8,12 @@ import { normalizeShareUrl } from './_normalize_share_url'
 require('../../../styles/invoicing/form.scss')
 
 class CreateInvoice extends Component {
+  constructor (props) {
+    super(props)
+
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
+  }
+
   componentWillMount () {
     this.props.fetchCustomers()
   }
@@ -48,7 +54,7 @@ class CreateInvoice extends Component {
     return (
       <div className='invoice-form-wrapper'>
         <h1 className='text-center'>New Invoice</h1>
-        <form onSubmit={this.props.handleSubmit(() => this.handleFormSubmit)}>
+        <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
           {this.renderAlert()}
           <div className='clearfix'>
             <fieldset className='customer-field'>
@@ -120,7 +126,7 @@ const form = reduxForm({
 CreateInvoice.propTypes = {
   customerList: React.PropTypes.array,      // mapStateToProps
   errorMessage: React.PropTypes.string,     // ?
-  handleSubmit: React.PropTypes.func,       // Redux form
+  handleSubmit: React.PropTypes.func,
   fetchCustomers: React.PropTypes.func,     // Redux action creator
   createInvoice: React.PropTypes.func       // Redux action creator
 }

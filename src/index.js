@@ -11,7 +11,7 @@ import Signup from './components/auth/signup';
 import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
 import Welcome from './components/welcome';
-import Invoices from './components/invoicing/list/invoices';
+import Invoices from './components/invoicing/list/Invoices';
 import InvoiceShow from './components/invoicing/show/invoice_show';
 import CreateInvoice from './components/invoicing/detail/CreateInvoice';
 import reducers from './reducers';

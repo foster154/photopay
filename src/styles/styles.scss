@@ -3,5 +3,7 @@
 @import './vendor/normalize.css';
 @import './vendor/boilerplate.css';
 @import './vendor/react-select.css';
-@import './variables.scss';
-@import './app.scss';
+@import './shared/variables.scss';
+@import './shared/floating_label_input.scss';
+@import './shared/buttons.scss';
+@import './shared/app.scss';

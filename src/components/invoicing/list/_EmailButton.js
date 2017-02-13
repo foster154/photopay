@@ -21,7 +21,9 @@ const EmailButton = (props) => {
     encodeURI(emailBody)
 
   return (
-    <Link className='invoice-list-btn email-btn' to={mailCode} target='_blank'>Send Email</Link>
+    <Link className='invoice-list-btn' to={mailCode} target='_blank'>
+      <span className='fa fa-paper-plane' />
+    </Link>
   )
 }
 

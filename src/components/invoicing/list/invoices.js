@@ -7,8 +7,8 @@ export default class Invoices extends Component {
   render () {
     return (
       <div className='invoices-wrapper'>
-        <Link to='/invoices/new' className='new-invoice-btn'>
-          New Invoice
+        <Link to='/invoices/new' className='btn-primary new-invoice-btn'>
+          <button className='btn-primary'>New Invoice</button>
         </Link>
         <h1>Invoices</h1>
         <InvoiceList />

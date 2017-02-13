@@ -16,22 +16,26 @@ class InvoiceList extends Component {
   renderInvoices () {
     if (this.props.invoices.length > 0) {
       return this.props.invoices.map((invoice) => {
+        const rowClasses = invoice.paid ? 'invoice-paid' : 'invoice-unpaid'
         return (
-          <tr key={invoice._id}>
+          <tr key={invoice._id} className={rowClasses}>
+            <td>
+              {invoice.paid
+                ? <span className='fa fa-check paid' />
+                : <span className='fa fa-close unpaid' /> }
+            </td>
             <td>{dateFormat(invoice.date, 'm/d/yy')}</td>
             <td>{invoice.invoiceNumber ? invoice.invoiceNumber : null}</td>
             <td>{invoice.billTo ? invoice.billTo.name : null}</td>
             <td className='text-left'>{invoice.lineItems[0].item}</td>
             <td>${(invoice.lineItems[0].amount).toFixed(2)}</td>
-            <td>
-              {invoice.paid
-                ? <span className='fa fa-usd paid' />
-                : <span className='fa fa-usd unpaid' /> }
-            </td>
-            <td>
-              <Link className='invoice-list-btn preview-btn' to={'/invoices/' + invoice._id} target='_blank'>Preview</Link>
-            </td>
-            <td>
+            <td className='invoice-list-actions'>
+              <Link className='invoice-list-btn preview-btn' to={'/invoices/' + invoice._id} target='_blank'>
+                <span className='fa fa-eye' />
+              </Link>
+              <Link className='invoice-list-btn edit-btn' to='#'>
+                <span className='fa fa-pencil' />
+              </Link>
               <EmailButton invoice={invoice} />
             </td>
           </tr>
@@ -51,13 +55,12 @@ class InvoiceList extends Component {
       <table className='invoices-table'>
         <thead>
           <tr>
+            <th>Paid</th>
             <th>Date</th>
             <th>Invoice #</th>
             <th>Company</th>
             <th className='text-left'>Description</th>
             <th>Amount</th>
-            <th>Paid</th>
-            <th />
             <th />
           </tr>
         </thead>

@@ -1,0 +1,19 @@
+.btn-primary {
+  background-color: $accent;
+  border: none;
+  color: white;
+  text-transform: uppercase;
+  height: 60px;
+  width: 200px;
+  font-size: 18px;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: $accent-hover;
+}
+
+.btn-primary:disabled,
+.btn-primary:hover:disabled {
+  background-color: #b3b3b3;
+}

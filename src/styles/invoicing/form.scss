@@ -5,6 +5,11 @@
   max-width: 96%;
   margin: 30px auto;
 
+  form {
+    background-color: white;
+    padding: 30px;
+  }
+
   label {
     color: $dkGrey;
     font-weight: 600;
@@ -36,20 +41,45 @@
     }
   }
 
-  .item-field {
-    width: 78%;
-    float: left;
-    margin-right: 2%;
-    @media (max-width: 600px) {
-      width: 100%;
-    }
-  }
+  ul.lineItems {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 
-  .amount-field {
-    width: 20%;
-    float: right;
-    @media (max-width: 600px) {
-      width: 100%;
+    button.add-item-btn {
+      display: block;
+      width: 300px;
+      margin: 5px auto;
+      border: none;
+      background-color: $accent;
+      padding: 8px 0;
+      color: #fff;
+    }
+
+    li.lineItem {
+      display: flex;
+    }
+
+    .item-field {
+      flex: 1;
+      margin-right: 2%;
+      @media (max-width: 600px) {
+        width: 100%;
+      }
+    }
+
+    .amount-field {
+      width: 180px;
+      @media (max-width: 600px) {
+        width: 40px;
+      }
+    }
+
+    button.delete-item-btn {
+      margin-left: 5px;
+      border: none;
+      background-color: #fff;
+      font-size: 22px;
     }
   }
 
@@ -76,13 +106,8 @@
     }
   }
 
-  .save-btn {
+  button.save-invoice {
     display: block;
-    margin: 40px auto;
-    border: none;
-    background-color: $accentColor;
-    border-radius: 5px;
-    padding: 20px 60px;
-    color: white;
+    margin: 40px auto 20px;
   }
 }

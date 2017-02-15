@@ -2,20 +2,30 @@ import React from 'react'
 import dateFormat from 'dateformat'
 require('../../../styles/invoicing/show.scss')
 
+const renderLineItems = (lineItems) => {
+  return lineItems.map(lineItem => {
+    return (
+      <div key={lineItem._id} className='line-item clearfix'>
+        <div className='description'>{lineItem.item}</div>
+        <div className='amount'>${lineItem.amount.toFixed(2)}</div>
+      </div>
+    )
+  })
+}
+
 const LineItems = ({ invoice }) => {
   return (
     <div className='line-items-wrapper'>
       <div className='title'>Invoice Detail</div>
       <div className='label'>{dateFormat(invoice.date, 'd mmm yyyy')}</div>
-      <div className='line-item clearfix'>
-        <div className='description'>{invoice.lineItems[0].item}</div>
-        <div className='amount'>${(invoice.lineItems[0].amount).toFixed(2)}</div>
-      </div>
+
+      { renderLineItems(invoice.lineItems) }
+
       <div className='total-wrapper'>
         <span className='total-due'>
           TOTAL DUE: ${invoice.paid
             ? '0'
-            : (invoice.lineItems[0].amount).toFixed(2)}
+            : (invoice.totalAmount).toFixed(2)}
         </span>
       </div>
     </div>

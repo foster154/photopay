@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import * as actions from '../../actions'
+import { signinUser } from '../../actions'
 require('../../styles/auth/signin.scss')
 
 const form = reduxForm({
@@ -64,4 +64,4 @@ Signin.propTypes = {
   handleSubmit: PropTypes.func            // redux-form
 }
 
-export default connect(mapStateToProps, actions)(form(Signin))
+export default connect(mapStateToProps, { signinUser })(form(Signin))

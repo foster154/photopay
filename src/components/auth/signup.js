@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
-import * as actions from '../../actions'
+import { signupUser } from '../../actions'
 
 class Signup extends Component {
   constructor (props) {
@@ -87,4 +87,4 @@ export default reduxForm({
   form: 'signup',
   fields: ['email', 'password', 'passwordConfirm'],
   validate
-}, mapStateToProps, actions)(Signup)
+}, mapStateToProps, { signupUser })(Signup)

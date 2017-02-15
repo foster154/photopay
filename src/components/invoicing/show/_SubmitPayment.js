@@ -23,7 +23,7 @@ class SubmitPayment extends Component {
           invoiceId={invoice._id}
           token={this.onToken}
           stripeKey={process.env.STRIPE_PUBLISHABLE_KEY}
-          amount={invoice.lineItems[0].amount * 100}
+          amount={invoice.totalAmount * 100}
           name={invoice.billFrom.name}
           description={invoice.lineItems[0].item}
         >

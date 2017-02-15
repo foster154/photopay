@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
-import { createInvoice } from '../../../actions'
-import { fetchCustomers } from '../../../actions/customers'
+import { createInvoice, fetchCustomers } from '../../../actions'
 import CustomerSelect from './CustomerSelect'
 import { normalizeShareUrl } from './_normalize_share_url'
+import RenderItems from './_RenderItems'
 require('../../../styles/invoicing/form.scss')
 
 class CreateInvoice extends Component {
@@ -19,13 +19,15 @@ class CreateInvoice extends Component {
   }
 
   handleFormSubmit (formProps) {
+    console.log(formProps)
+
     const validShareUrl = normalizeShareUrl(formProps.shareUrl)
 
     const expandedFormProps = {
       customerName: this.props.customerList[formProps.customer - 1].name,
       customerEmail: this.props.customerList[formProps.customer - 1].email,
       invoiceNumber: formProps.invoiceNumber,
-      item: formProps.item,
+      lineItems: formProps.lineItems,
       amount: formProps.amount,
       shareUrl: validShareUrl,
       displayShareLinkImmediately: formProps.displayShareLinkImmediately,
@@ -33,6 +35,20 @@ class CreateInvoice extends Component {
     }
     console.info('expandedFormProps', expandedFormProps)
     this.props.createInvoice(expandedFormProps)
+  }
+
+  calculateTotal () {
+    console.log(this.props.lineItemValues)
+    if (this.props.lineItemValues) {
+      return this.props.lineItemValues.reduce((sum, lineItem) => {
+        const amount = lineItem.amount
+        if (amount && !isNaN(parseFloat(amount))) {
+          return sum + parseFloat(lineItem.amount)
+        } else {
+          return sum
+        }
+      }, 0)
+    }
   }
 
   renderAlert () {
@@ -48,12 +64,11 @@ class CreateInvoice extends Component {
       customerOptions = this.props.customerList.map(function (customer, index) {
         return { value: index + 1, label: customer.name }
       })
-      console.log('customerOptions', customerOptions)
     }
 
     return (
       <div className='invoice-form-wrapper'>
-        <h1 className='text-center'>New Invoice</h1>
+        <h1>Create Invoice</h1>
         <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
           {this.renderAlert()}
           <div className='clearfix'>
@@ -78,19 +93,10 @@ class CreateInvoice extends Component {
 
           <h2 className='text-center'>Items</h2>
           <div className='clearfix'>
-            <div className='clearfix'>
-              <fieldset className='item-field'>
-                <label>Item:</label>
-                <Field className='text-input' name='item' component='input' type='input' />
-              </fieldset>
-              <fieldset className='amount-field'>
-                <label>Amount:</label>
-                <Field className='text-input' name='amount' component='input' type='input' />
-              </fieldset>
-            </div>
+            <FieldArray name='lineItems' component={RenderItems} />
             <div className='clearfix'>
               <div className='total-label'>Total:</div>
-              <div className='total-amount'>${}</div>
+              <div className='total-amount'>${ this.calculateTotal() }</div>
             </div>
           </div>
 
@@ -108,7 +114,7 @@ class CreateInvoice extends Component {
             <br />
           </fieldset>
 
-          <button className='save-btn clearfix' action='submit'>Save Invoice</button>
+          <button className='btn-primary clearfix save-invoice' action='submit'>Save Invoice</button>
         </form>
       </div>
     )
@@ -116,7 +122,12 @@ class CreateInvoice extends Component {
 }
 
 function mapStateToProps (state) {
-  return { customerList: state.customers.customerList }
+  const selector = formValueSelector('createInvoice')
+
+  return {
+    customerList: state.customers.customerList,
+    lineItemValues: selector(state, 'lineItems')
+  }
 }
 
 const form = reduxForm({
@@ -126,6 +137,7 @@ const form = reduxForm({
 CreateInvoice.propTypes = {
   customerList: PropTypes.array,      // mapStateToProps
   errorMessage: PropTypes.string,     // ?
+  lineItemValues: PropTypes.array,    // Redux form
   handleSubmit: PropTypes.func,       // Redux form
   fetchCustomers: PropTypes.func,     // Redux action creator
   createInvoice: PropTypes.func       // Redux action creator

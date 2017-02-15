@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import * as actions from '../../../actions'
+import { fetchInvoices } from '../../../actions'
 import dateFormat from 'dateformat'
 import EmailButton from './_EmailButton'
 require('../../../styles/invoicing/list.scss')
@@ -10,7 +10,6 @@ class InvoiceList extends Component {
 
   componentWillMount () {
     this.props.fetchInvoices()
-    console.log(this.props.invoices)
   }
 
   renderInvoices () {
@@ -28,7 +27,7 @@ class InvoiceList extends Component {
             <td>{invoice.invoiceNumber ? invoice.invoiceNumber : null}</td>
             <td>{invoice.billTo ? invoice.billTo.name : null}</td>
             <td className='text-left'>{invoice.lineItems[0].item}</td>
-            <td>${(invoice.lineItems[0].amount).toFixed(2)}</td>
+            <td>${invoice.totalAmount}</td>
             <td className='invoice-list-actions'>
               <Link className='invoice-list-btn preview-btn' to={'/invoices/' + invoice._id} target='_blank'>
                 <span className='fa fa-eye' />
@@ -81,4 +80,4 @@ InvoiceList.propTypes = {
   invoices: PropTypes.array
 }
 
-export default connect(mapStateToProps, actions)(InvoiceList)
+export default connect(mapStateToProps, { fetchInvoices })(InvoiceList)

@@ -29,10 +29,10 @@ class InvoiceList extends Component {
             <td className='text-left'>{invoice.lineItems[0].item}</td>
             <td>${invoice.totalAmount}</td>
             <td className='invoice-list-actions'>
-              <Link className='invoice-list-btn preview-btn' to={'/invoices/' + invoice._id} target='_blank'>
+              <Link className='invoice-list-btn preview-btn' to={'/' + invoice._id} target='_blank'>
                 <span className='fa fa-eye' />
               </Link>
-              <Link className='invoice-list-btn edit-btn' to='#'>
+              <Link className='invoice-list-btn edit-btn' to={'/invoices/edit/' + invoice._id}>
                 <span className='fa fa-pencil' />
               </Link>
               <EmailButton invoice={invoice} />

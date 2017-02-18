@@ -13,7 +13,7 @@ import Signout from './components/auth/Signout'
 import Welcome from './components/Welcome'
 import Invoices from './components/invoicing/list/Invoices'
 import InvoiceShow from './components/invoicing/show/InvoiceShow'
-import CreateInvoice from './components/invoicing/detail/CreateInvoice'
+import InvoiceForm from './components/invoicing/Form/InvoiceForm'
 import reducers from './reducers'
 import { AUTH_USER } from './actions/types'
 
@@ -43,10 +43,11 @@ ReactDOM.render(
         <Route path='signup' component={Signup} />
         <Route path='signout' component={Signout} />
         <Route path='invoices' component={RequireAuth(Invoices)} />
-        <Route path='/invoices/new' component={CreateInvoice} />
+        <Route path='/invoices/new' component={InvoiceForm} />
+        <Route path='/invoices/edit/:id' component={InvoiceForm} />
       </Route>
 
-      <Route path='/invoices/:id' component={InvoiceShow} />
+      <Route path='/:id' component={InvoiceShow} />
     </Router>
   </Provider>
   , document.querySelector('#root'))

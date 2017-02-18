@@ -1,25 +1,28 @@
 import React, { Component, PropTypes } from 'react'
 import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
-import { createInvoice, fetchCustomers } from '../../../actions'
+import { createInvoice, fetchCustomers, fetchInvoice } from '../../../actions'
 import CustomerSelect from './CustomerSelect'
 import { normalizeShareUrl } from './_normalize_share_url'
 import RenderItems from './_RenderItems'
 require('../../../styles/invoicing/form.scss')
 
-class CreateInvoice extends Component {
+class InvoiceForm extends Component {
   constructor (props) {
     super(props)
-
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
 
   componentWillMount () {
+    // console.log('*** InvoiceForm props', this.props)
     this.props.fetchCustomers()
+    if (this.props.routeParams.id) {
+      this.props.fetchInvoice(this.props.routeParams.id)
+    }
   }
 
   handleFormSubmit (formProps) {
-    console.log(formProps)
+    // console.log(formProps)
 
     const validShareUrl = normalizeShareUrl(formProps.shareUrl)
 
@@ -33,12 +36,12 @@ class CreateInvoice extends Component {
       displayShareLinkImmediately: formProps.displayShareLinkImmediately,
       paid: formProps.paid
     }
-    console.info('expandedFormProps', expandedFormProps)
+    // console.info('expandedFormProps', expandedFormProps)
     this.props.createInvoice(expandedFormProps)
   }
 
   calculateTotal () {
-    console.log(this.props.lineItemValues)
+    // console.log(this.props.lineItemValues)
     if (this.props.lineItemValues) {
       return this.props.lineItemValues.reduce((sum, lineItem) => {
         const amount = lineItem.amount
@@ -79,6 +82,7 @@ class CreateInvoice extends Component {
                 component={props =>
                   <CustomerSelect
                     {...props}
+                    // input={{value: this.state.initialValues.}}
                     options={customerOptions}
                     clearable={false}
                   />
@@ -122,25 +126,29 @@ class CreateInvoice extends Component {
 }
 
 function mapStateToProps (state) {
-  const selector = formValueSelector('createInvoice')
+  const selector = formValueSelector('invoiceForm')
 
   return {
+    initialValues: state.invoicing.invoice,
     customerList: state.customers.customerList,
     lineItemValues: selector(state, 'lineItems')
   }
 }
 
 const form = reduxForm({
-  form: 'createInvoice'
+  form: 'invoiceForm',
+  enableReinitialize: true
 })
 
-CreateInvoice.propTypes = {
+InvoiceForm.propTypes = {
+  routeParams: PropTypes.object,
   customerList: PropTypes.array,      // mapStateToProps
   errorMessage: PropTypes.string,     // ?
   lineItemValues: PropTypes.array,    // Redux form
   handleSubmit: PropTypes.func,       // Redux form
   fetchCustomers: PropTypes.func,     // Redux action creator
-  createInvoice: PropTypes.func       // Redux action creator
+  createInvoice: PropTypes.func,       // Redux action creator
+  fetchInvoice: PropTypes.func
 }
 
-export default connect(mapStateToProps, { createInvoice, fetchCustomers })(form(CreateInvoice))
+export default connect(mapStateToProps, { createInvoice, fetchCustomers, fetchInvoice })(form(InvoiceForm))

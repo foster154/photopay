@@ -6,6 +6,7 @@ class CustomerSelect extends Component {
     super(props)
 
     this.onChange = this.onChange.bind(this)
+    console.log(props)
   }
 
   onChange (event) {

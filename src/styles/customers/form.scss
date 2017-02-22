@@ -1,0 +1,25 @@
+@import '../shared/variables';
+
+form.photo-invoice-form {
+  background-color: white;
+  padding: 30px;
+
+  label {
+    color: $dkGrey;
+    font-weight: 600;
+  }
+
+  .text-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid $accent;
+    font-size: 18px;
+    margin-bottom: 10px;
+    background-color: rgba(177, 219, 231, 0.07);
+  }
+
+  button.save-customer {
+    display: block;
+    margin: 10px auto;
+  }
+}

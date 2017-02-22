@@ -1,0 +1,74 @@
+@import '../shared/variables';
+
+.customers-wrapper {
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+
+  .customer-create-success-alert {
+    background-color: #62bf62;
+    position: fixed;
+    top: 178px;
+    color: #f9f9f9;
+    width: 326px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .new-customer-btn {
+    position: absolute;
+    display: inline-block;
+    right: 0;
+    text-decoration: none;
+    margin: 10px 0;
+  }
+
+  table.customers {
+    width: 700px;
+    max-width: 90%;
+    margin: 50px auto;
+    list-style: none;
+
+    th {
+      color: white;
+      text-align: left;
+      padding: 0 10px 5px;
+    }
+
+    td {
+      padding: 10px;
+      background-color: white;
+
+      .customerName {
+        font-size: 18px;
+      }
+      .contactName {
+        font-size: 16px;
+        font-weight: 300;
+        margin-left: 10px;
+      }
+    }
+
+    .customer-list-btn {
+      border: none;
+      color: white;
+      font-size: 16px;
+      text-decoration: none;
+      margin: 3px;
+      padding: 10px 15px;
+      background-color: $accent;
+      border: 1px solid $accent;
+      transition: background-color 0.2s, border 0.2s;
+    }
+
+    .customer-list-btn:hover {
+      background-color: $accent-hover;
+      border: 1px solid $primary-xlight;
+    }
+
+    .edit-btn {
+      float: right;
+    }
+  }
+}

@@ -1,14 +1,14 @@
-import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
-import authReducer from './auth_reducer';
-import invoicesReducer from './invoices_reducer';
-import customersReducer from './customers_reducer';
+import { combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form'
+import authReducer from './AuthReducer'
+import invoicesReducer from './InvoicesReducer'
+import customersReducer from './CustomersReducer'
 
 const rootReducer = combineReducers({
   auth: authReducer,
   invoicing: invoicesReducer,
   customers: customersReducer,
-  form: formReducer,
-});
+  form: formReducer
+})
 
-export default rootReducer;
+export default rootReducer

@@ -12,6 +12,9 @@ class Header extends Component {
           <Link to='/invoices'>Invoices</Link>
         </li>,
         <li key={3}>
+          <Link to='/customers'>Customers</Link>
+        </li>,
+        <li key={4}>
           <Link to='/signout'>Sign Out</Link>
         </li>
       ]

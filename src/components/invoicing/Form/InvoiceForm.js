@@ -72,7 +72,9 @@ class InvoiceForm extends Component {
     return (
       <div className='invoice-form-wrapper'>
         <h1>Create Invoice</h1>
-        <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+        <form
+          className='photo-invoice-form'
+          onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
           {this.renderAlert()}
           <div className='clearfix'>
             <fieldset className='customer-field'>

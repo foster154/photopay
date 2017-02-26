@@ -16,6 +16,7 @@ import InvoiceShow from './components/invoicing/show/InvoiceShow'
 import InvoiceForm from './components/invoicing/Form/InvoiceForm'
 import Customers from './components/Customers/Customers'
 import CreateCustomer from './components/Customers/CreateCustomer'
+import EditCustomer from './components/Customers/EditCustomer'
 import reducers from './reducers'
 import { AUTH_USER } from './actions/types'
 
@@ -49,6 +50,7 @@ ReactDOM.render(
         <Route path='/invoices/edit/:id' component={InvoiceForm} />
         <Route path='/customers' component={RequireAuth(Customers)} />
         <Route path='/customers/new' component={RequireAuth(CreateCustomer)} />
+        <Route path='/customers/edit/:id' component={RequireAuth(EditCustomer)} />
       </Route>
 
       <Route path='/:id' component={InvoiceShow} />

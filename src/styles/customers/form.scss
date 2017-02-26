@@ -23,3 +23,45 @@ form.photo-invoice-form {
     margin: 10px auto;
   }
 }
+
+.edit-form-wrapper {
+  background-color: white;
+  padding-bottom: 10px;
+
+  button.delete-customer-btn {
+    display: block;
+    margin: -20px auto 20px;
+    background-color: $red;
+  }
+
+  button.delete-customer-btn:hover,
+  .delete-confirm-link.delete:hover {
+    background-color: $red-hover;
+  }
+
+  .delete-confirm-wrapper {
+    margin-top: -20px;
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  .delete-confirm-link {
+    width: 200px;
+    margin: 5px auto;
+    padding: 10px;
+    text-align: center;
+    color: white;
+  }
+
+  .delete-confirm-link.delete {
+    background-color: $red;
+  }
+
+  .delete-confirm-link.cancel {
+    background-color: #ccc;
+  }
+
+  .delete-confirm-link.cancel:hover {
+    background-color: #b7b5b5;
+  }
+}

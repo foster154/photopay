@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { createCustomer, createCustomerReset } from '../../actions'
+import { createCustomer, customerStatusReset } from '../../actions'
 require('../../styles/customers/form.scss')
 
 class CustomerForm extends Component {
@@ -11,25 +11,19 @@ class CustomerForm extends Component {
   }
 
   componentWillMount () {
-    this.props.createCustomerReset()
+    this.props.customerStatusReset()
   }
 
   handleFormSubmit (formProps) {
-    console.log('handleFormSubmit!!!')
-    console.log(formProps)
-    this.props.createCustomer({
-      customerName: formProps.customerName,
-      contactFirstName: formProps.firstName,
-      contactLastName: formProps.lastName,
-      email: formProps.email,
-      onCreateSuccess: this.props.onCreateSuccess })
+    this.props.onFormSubmit(formProps)
   }
 
   renderErrorMessage () {
-    if (this.props.createStatus === 'error') {
+    const { customerStatus } = this.props
+    if (customerStatus.type === 'error') {
       return (
         <div className='msg-red' style={{color: '#C00'}}>
-          { this.props.errorMessage }
+          { customerStatus.msg }
         </div>
       )
     }
@@ -53,16 +47,16 @@ class CustomerForm extends Component {
 
         <fieldset>
           <label>First Name of Contact</label>
-          <Field className='text-input' name='firstName' component='input' type='input' />
+          <Field className='text-input' name='contactFirstName' component='input' type='input' />
         </fieldset>
 
         <fieldset>
           <label>Last Name of Contact</label>
-          <Field className='text-input' name='lastName' component='input' type='input' />
+          <Field className='text-input' name='contactLastName' component='input' type='input' />
         </fieldset>
 
         {
-          this.props.createStatus === 'loading'
+          this.props.customerStatus.type === 'loading'
           ? <button className='btn-primary clearfix save-customer' action='submit'><span className='fa fa-spin fa-spinner' /></button>
           : <button className='btn-primary clearfix save-customer' action='submit'>Save Customer</button>
         }
@@ -73,22 +67,27 @@ class CustomerForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    createStatus: state.customers.createStatus,
-    errorMessage: state.customers.errorMessage
+    initialValues: state.customers.customer,
+    customerStatus: state.customers.status
   }
 }
 
 const form = reduxForm({
-  form: 'customerForm'
+  form: 'customerForm',
+  enableReinitialize: true
 })
 
 CustomerForm.propTypes = {
-  handleSubmit: PropTypes.func,
-  createStatus: PropTypes.string,
-  errorMessage: PropTypes.string,
-  createCustomer: PropTypes.func,
+  // component declaration
+  onFormSubmit: PropTypes.func,
   onCreateSuccess: PropTypes.func,
-  createCustomerReset: PropTypes.func
+  // redux form
+  handleSubmit: PropTypes.func,
+  // mapStateToProps
+  customerStatus: PropTypes.object,
+  // action creators
+  createCustomer: PropTypes.func,
+  customerStatusReset: PropTypes.func
 }
 
-export default connect(mapStateToProps, { createCustomer, createCustomerReset })(form(CustomerForm))
+export default connect(mapStateToProps, { createCustomer, customerStatusReset })(form(CustomerForm))

@@ -1,17 +1,27 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
+const renderContactName = (firstName, lastName) => {
+  let fullName = ''
+  firstName ? fullName += firstName : null
+  firstName && lastName ? fullName += ' ' : null
+  lastName ? fullName += lastName : null
+  return fullName
+}
+
 const CustomerRow = ({ customer }) => {
   const { customerName, email, contactFirstName, contactLastName } = customer
   return (
     <tr>
       <td className='customer'>
         <div className='customerName'>{customerName}</div>
-        <div className='contactName'>{`${contactFirstName} ${contactLastName}`}</div>
+        <div className='contactName'>
+          { renderContactName(contactFirstName, contactLastName) }
+        </div>
       </td>
       <td className='email'>{email}</td>
       <td className='actions'>
-        <Link className='customer-list-btn edit-btn' to={'/' + customer._id} target='_blank'>
+        <Link className='customer-list-btn edit-btn' to={'/customers/edit/' + customer._id}>
           <span className='fa fa-pencil' />
         </Link>
       </td>

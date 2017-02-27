@@ -27,8 +27,9 @@ class InvoiceForm extends Component {
     const validShareUrl = normalizeShareUrl(formProps.shareUrl)
 
     const expandedFormProps = {
-      customerName: this.props.customerList[formProps.customer - 1].name,
-      customerEmail: this.props.customerList[formProps.customer - 1].email,
+      // customerName: this.props.customerList[formProps.customer - 1].name,
+      // customerEmail: this.props.customerList[formProps.customer - 1].email,
+      customer: formProps.customer,
       invoiceNumber: formProps.invoiceNumber,
       lineItems: formProps.lineItems,
       amount: formProps.amount,
@@ -65,7 +66,7 @@ class InvoiceForm extends Component {
 
     if (this.props.customerList.length > 0) {
       customerOptions = this.props.customerList.map(function (customer, index) {
-        return { value: index + 1, label: customer.name }
+        return { value: customer._id, label: `${customer.customerName} - ${customer.contactFirstName} ${customer.contactLastName}` }
       })
     }
 

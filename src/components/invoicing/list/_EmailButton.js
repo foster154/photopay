@@ -6,7 +6,7 @@ const EmailButton = (props) => {
   const invoiceURL = `http://photopay.herokuapp.com/invoices/${invoice._id}`
   const emailSubject = 'Your Photos from Panoractives are Ready!'
   const emailBody =
-    'Hi ' + invoice.billTo.name + ',\n\n' +
+    'Hi ' + invoice.customer.customerName + ',\n\n' +
     'Thanks again for letting us shoot this home for you! Your photos are now ready. Please click the link below to see the invoice. Immediately after submitting payment you\'ll have the ability to access and download the photos.\n\n' +
     invoice.lineItems[0].item + ':\n' +
     invoiceURL + '\n\n' +
@@ -14,7 +14,7 @@ const EmailButton = (props) => {
 
   const mailCode =
     'mailto:' +
-    invoice.billTo.email +
+    invoice.customer.email +
     '?subject=' +
     encodeURI(emailSubject) +
     '&body=' +

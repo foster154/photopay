@@ -25,7 +25,7 @@ class InvoiceList extends Component {
             </td>
             <td>{dateFormat(invoice.date, 'm/d/yy')}</td>
             <td>{invoice.invoiceNumber ? invoice.invoiceNumber : null}</td>
-            <td>{invoice.billTo ? invoice.billTo.name : null}</td>
+            <td>{invoice.customer.customerName}</td>
             <td className='text-left'>{invoice.lineItems[0].item}</td>
             <td>${invoice.totalAmount}</td>
             <td className='invoice-list-actions'>

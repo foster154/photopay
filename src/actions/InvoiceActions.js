@@ -23,8 +23,7 @@ export function fetchInvoices () {
 }
 
 export function createInvoice ({
-    customerName,
-    customerEmail,
+    customer,
     invoiceNumber,
     lineItems,
     amount,
@@ -33,8 +32,7 @@ export function createInvoice ({
     paid
   }) {
   console.log('Action creator params:',
-  customerName,
-  customerEmail,
+  customer,
   invoiceNumber,
   lineItems,
   amount,
@@ -47,10 +45,7 @@ export function createInvoice ({
       url: `${API_URL}/invoices`,
       data: {
         invoiceNumber,
-        billTo: {
-          name: customerName,
-          email: customerEmail
-        },
+        customer,
         billFrom: {
           name: 'Panoractives',
           email: 'info@panoractives.com'

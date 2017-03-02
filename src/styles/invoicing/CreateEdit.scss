@@ -1,0 +1,52 @@
+@import '../shared/variables';
+
+.create-edit-invoice-page {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  width: 800px;
+  max-width: 96%;
+
+  .edit-invoice-form-wrapper {
+    background-color: white;
+    padding-bottom: 10px;
+  }
+
+  button.delete-invoice-btn {
+    display: block;
+    margin: -60px auto 20px;
+    background-color: $red;
+  }
+
+  button.delete-invoice-btn:hover,
+  .delete-confirm-link.delete:hover {
+    background-color: $red-hover;
+  }
+
+  .delete-confirm-wrapper {
+    margin-top: -60px;
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  .delete-confirm-link {
+    width: 200px;
+    margin: 5px auto;
+    padding: 10px;
+    text-align: center;
+    color: white;
+  }
+
+  .delete-confirm-link.delete {
+    background-color: $red;
+  }
+
+  .delete-confirm-link.cancel {
+    background-color: #ccc;
+  }
+
+  .delete-confirm-link.cancel:hover {
+    background-color: #b7b5b5;
+  }
+}

@@ -4,8 +4,10 @@ import { browserHistory } from 'react-router'
 import {
   FETCH_INVOICES,
   FETCH_INVOICE,
-  CREATE_INVOICE,
-  CREATE_CHARGE
+  SAVE_INVOICE,
+  CREATE_CHARGE,
+  DELETE_INVOICE,
+  CLEAR_INVOICE
 } from './types'
 
 export function fetchInvoices () {
@@ -31,15 +33,9 @@ export function createInvoice ({
     displayShareLinkImmediately,
     paid
   }) {
-  console.log('Action creator params:',
-  customer,
-  invoiceNumber,
-  lineItems,
-  amount,
-  shareUrl,
-  displayShareLinkImmediately,
-  paid)
+  // console.log('Action creator params:', customer, invoiceNumber, lineItems, amount, shareUrl, displayShareLinkImmediately, paid)
   return function (dispatch) {
+    dispatch({ type: SAVE_INVOICE, payload: {status: 'start'} })
     axios({
       method: 'post',
       url: `${API_URL}/invoices`,
@@ -61,10 +57,20 @@ export function createInvoice ({
     })
     .then(response => {
       dispatch({
-        type: CREATE_INVOICE,
-        payload: response.data
+        type: SAVE_INVOICE,
+        payload: {status: 'success', message: 'Invoice created successfully'}
       })
       browserHistory.push('/invoices')
+      setTimeout(() => {
+        dispatch(clearInvoice())
+      }, 3000)
+    })
+    .catch(error => {
+      console.log(error)
+      dispatch({
+        type: SAVE_INVOICE,
+        payload: {status: 'error', message: 'There was a problem creating the invoice. Please try again.'}
+      })
     })
   }
 }
@@ -76,6 +82,53 @@ export function fetchInvoice (id) {
       dispatch({
         type: FETCH_INVOICE,
         payload: response.data
+      })
+    })
+  }
+}
+
+export function editInvoice ({
+    id,
+    customer,
+    invoiceNumber,
+    lineItems,
+    amount,
+    shareUrl,
+    displayShareLinkImmediately,
+    paid
+  }) {
+  return function (dispatch) {
+    dispatch({ type: SAVE_INVOICE, payload: {status: 'start'} })
+    axios({
+      method: 'put',
+      url: `${API_URL}/invoices/${id}`,
+      data: {
+        invoiceNumber,
+        customer,
+        billFrom: {
+          name: 'Panoractives',
+          email: 'info@panoractives.com'
+        },
+        lineItems,
+        shareUrl,
+        invoiceSettings: {
+          displayShareLinkImmediately: displayShareLinkImmediately || false
+        },
+        paid: paid || false
+      },
+      headers: { authorization: window.localStorage.getItem('token') }
+    })
+    .then(response => {
+      dispatch({
+        type: SAVE_INVOICE,
+        payload: {status: 'success', message: 'Invoice saved successfully'}
+      })
+    })
+    .catch(error => {
+      console.log(error)
+      dispatch({
+        type: SAVE_INVOICE,
+        payload: {status: 'error', message: 'There was a problem saving the invoice. Please try again.'}
       })
     })
   }
@@ -97,4 +150,37 @@ export function createCharge (token, id) {
       })
     })
   }
+}
+
+export function deleteInvoice (id) {
+  return function (dispatch) {
+    dispatch({
+      type: DELETE_INVOICE,
+      payload: { status: 'start' }
+    })
+    axios.delete(`${API_URL}/invoices/${id}`, {
+      headers: { authorization: window.localStorage.getItem('token') }
+    })
+    .then(response => {
+      dispatch({
+        type: DELETE_INVOICE,
+        payload: { status: 'success', message: 'Invoice deleted.' }
+      })
+      browserHistory.push('/invoices')
+      setTimeout(() => {
+        dispatch(clearInvoice())
+      }, 3000)
+    })
+    .catch(error => {
+      console.log(error)
+      dispatch({
+        type: DELETE_INVOICE,
+        payload: { status: 'error', message: 'There was a problem deleting the invoice. Please try again.' }
+      })
+    })
+  }
+}
+
+export function clearInvoice () {
+  return { type: CLEAR_INVOICE }
 }

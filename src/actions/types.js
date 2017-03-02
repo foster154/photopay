@@ -6,8 +6,10 @@ export const AUTH_ERROR = 'auth_error'
 // Invoices
 export const FETCH_INVOICES = 'fetch_invoices'
 export const FETCH_INVOICE = 'fetch_invoice'
-export const CREATE_INVOICE = 'create_invoice'
+export const SAVE_INVOICE = 'SAVE_INVOICE'
 export const CREATE_CHARGE = 'create_charge'
+export const DELETE_INVOICE = 'DELETE_INVOICE'
+export const CLEAR_INVOICE = 'CLEAR_INVOICE'
 
 // Customers
 export const FETCH_CUSTOMERS_START = 'FETCH_CUSTOMERS_START'

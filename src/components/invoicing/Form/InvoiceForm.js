@@ -16,19 +16,15 @@ class InvoiceForm extends Component {
   componentWillMount () {
     // console.log('*** InvoiceForm props', this.props)
     this.props.fetchCustomers()
-    if (this.props.routeParams.id) {
-      this.props.fetchInvoice(this.props.routeParams.id)
-    }
+    // if (this.props.routeParams.id) {
+    //   this.props.fetchInvoice(this.props.routeParams.id)
+    // }
   }
 
   handleFormSubmit (formProps) {
-    // console.log(formProps)
-
     const validShareUrl = normalizeShareUrl(formProps.shareUrl)
 
     const expandedFormProps = {
-      // customerName: this.props.customerList[formProps.customer - 1].name,
-      // customerEmail: this.props.customerList[formProps.customer - 1].email,
       customer: formProps.customer,
       invoiceNumber: formProps.invoiceNumber,
       lineItems: formProps.lineItems,
@@ -37,8 +33,8 @@ class InvoiceForm extends Component {
       displayShareLinkImmediately: formProps.displayShareLinkImmediately,
       paid: formProps.paid
     }
-    // console.info('expandedFormProps', expandedFormProps)
-    this.props.createInvoice(expandedFormProps)
+
+    this.props.onFormSubmit(expandedFormProps)
   }
 
   calculateTotal () {
@@ -72,7 +68,6 @@ class InvoiceForm extends Component {
 
     return (
       <div className='invoice-form-wrapper'>
-        <h1>Create Invoice</h1>
         <form
           className='photo-invoice-form'
           onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
@@ -145,12 +140,12 @@ const form = reduxForm({
 
 InvoiceForm.propTypes = {
   routeParams: PropTypes.object,
+  onFormSubmit: PropTypes.func,
   customerList: PropTypes.array,      // mapStateToProps
   errorMessage: PropTypes.string,     // ?
   lineItemValues: PropTypes.array,    // Redux form
   handleSubmit: PropTypes.func,       // Redux form
   fetchCustomers: PropTypes.func,     // Redux action creator
-  createInvoice: PropTypes.func,       // Redux action creator
   fetchInvoice: PropTypes.func
 }
 

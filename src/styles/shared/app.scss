@@ -27,3 +27,23 @@ h2 {
   padding: 8px 10px;
   margin-bottom: 15px;
 }
+
+.alert-success {
+  background-color: #62bf62;
+  color: #f9f9f9;
+  width: 100%;
+  padding: 10px !important;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.alert-error {
+  background-color: #cc0000;
+  color: #f9f9f9;
+  width: 100%;
+  padding: 10px !important;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 10px;
+}

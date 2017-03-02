@@ -13,14 +13,19 @@
       width: 100%;
     }
 
+    .Select-placeholder, .Select--single > .Select-control .Select-value {
+      // top: 3px !important;
+      line-height: 47px;
+    }
+
     .Select-control {
       padding: 3px;
       border: 1px solid $accent;
       border-radius: 0;
       font-size: 18px;
 
-      .Select-placeholder, .Select--single > .Select-control .Select-value {
-        top: 3px;
+      .Select-arrow {
+        border-color: $accent transparent transparent;
       }
     }
   }

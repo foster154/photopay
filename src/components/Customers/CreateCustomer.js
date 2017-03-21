@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { clearCustomerForm, createCustomer } from '../../actions'
 import CustomerForm from './_CustomerForm'
-import { browserHistory } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 require('../../styles/customers/create.scss')
 
 class CreateCustomer extends Component {
@@ -16,6 +16,9 @@ class CreateCustomer extends Component {
     return (
       <div className='create-customer-page'>
         <h1>Create a Customer</h1>
+        <Link to='/customers'>
+          <span className='fa fa-arrow-left' style={{marginBottom: 10}} /> Back to Customer List
+        </Link>
         <CustomerForm
           onFormSubmit={values => this.props.createCustomer({...values, onCreateSuccess})}
         />

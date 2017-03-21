@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import InvoiceForm from './Form/InvoiceForm'
+import Notification from '../Shared/Notification'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 import { fetchInvoice, updateInvoice, deleteInvoice } from '../../actions'
 require('../../styles/invoicing/CreateEdit.scss')
 
@@ -59,6 +60,9 @@ class EditInvoice extends Component {
     return (
       <div className='create-edit-invoice-page'>
         <h1>Edit Invoice</h1>
+        <Link to='/invoices'>
+          <span className='fa fa-arrow-left' /> Back to Invoices
+        </Link>
         <div className='edit-invoice-form-wrapper'>
           <InvoiceForm
             onFormSubmit={values => this.props.updateInvoice({

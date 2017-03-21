@@ -37,6 +37,17 @@ class InvoiceForm extends Component {
     this.props.onFormSubmit(expandedFormProps)
   }
 
+  composeCustomerLabel (customer) {
+    const { customerName, contactFirstName, contactLastName } = customer
+    let label = customerName
+    contactFirstName || contactLastName ? label += ' - ' : null
+    contactFirstName ? label += contactFirstName : null
+    contactLastName ? label += ' ' : null
+    contactLastName ? label += contactLastName : null
+    // console.log({label})
+    return label
+  }
+
   calculateTotal () {
     // console.log(this.props.lineItemValues)
     if (this.props.lineItemValues) {
@@ -61,8 +72,11 @@ class InvoiceForm extends Component {
     let customerOptions = [ {} ]
 
     if (this.props.customerList.length > 0) {
-      customerOptions = this.props.customerList.map(function (customer, index) {
-        return { value: customer._id, label: `${customer.customerName} - ${customer.contactFirstName} ${customer.contactLastName}` }
+      customerOptions = this.props.customerList.map(function (customer) {
+        return {
+          value: customer._id,
+          label: `${customer.customerName} - ${customer.contactFirstName || ''} ${customer.contactLastName || ''}`
+        }
       })
     }
 

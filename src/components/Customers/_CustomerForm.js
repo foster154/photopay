@@ -18,23 +18,12 @@ class CustomerForm extends Component {
     this.props.onFormSubmit(formProps)
   }
 
-  renderErrorMessage () {
-    const { customerStatus } = this.props
-    if (customerStatus.type === 'error') {
-      return (
-        <div className='msg-red' style={{color: '#C00'}}>
-          { customerStatus.msg }
-        </div>
-      )
-    }
-  }
-
   render () {
     return (
       <form
         className='photo-invoice-form'
         onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-        { this.renderErrorMessage() }
+
         <fieldset>
           <label>Customer/Company Name<sup>*</sup></label>
           <Field className='text-input' name='customerName' component='input' type='input' />
@@ -56,7 +45,7 @@ class CustomerForm extends Component {
         </fieldset>
 
         {
-          this.props.customerStatus.type === 'loading'
+          this.props.saveStatus === 'loading'
           ? <button className='btn-primary clearfix save-customer' action='submit'><span className='fa fa-spin fa-spinner' /></button>
           : <button className='btn-primary clearfix save-customer' action='submit'>Save Customer</button>
         }
@@ -68,7 +57,7 @@ class CustomerForm extends Component {
 const mapStateToProps = state => {
   return {
     initialValues: state.customers.customer,
-    customerStatus: state.customers.status
+    saveStatus: state.customers.saveStatus
   }
 }
 
@@ -84,7 +73,7 @@ CustomerForm.propTypes = {
   // redux form
   handleSubmit: PropTypes.func,
   // mapStateToProps
-  customerStatus: PropTypes.object,
+  saveStatus: PropTypes.string,
   // action creators
   createCustomer: PropTypes.func,
   customerStatusReset: PropTypes.func

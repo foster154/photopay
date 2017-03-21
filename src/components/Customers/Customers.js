@@ -10,21 +10,8 @@ class Customers extends Component {
     this.props.fetchCustomers()
   }
 
-  renderCreateSuccessMessage () {
-    const { customerStatus } = this.props
-    if (customerStatus.type === 'success') {
-      return (
-        <tr>
-          <th className='customer-create-success-alert' colSpan='3'>
-            { customerStatus.msg }
-          </th>
-        </tr>
-      )
-    }
-  }
-
-  renderCustomers () {
-    const { customerListStatus, customers } = this.props
+  renderLoadingSpinner () {
+    const { customerListStatus } = this.props
     if (customerListStatus === 'loading') {
       return (
         // List is loading
@@ -32,17 +19,27 @@ class Customers extends Component {
           <span className='fa fa-spin fa-spinner' />
         </div>
       )
-    } else if (customerListStatus === 'success' && customers.length === 0) {
+    }
+  }
+
+  renderEmptyMessage () {
+    const { customerListStatus, customers } = this.props
+    if (customerListStatus === 'success' && customers.length === 0) {
       return (
-        // Custer list is loaded, and is empty
+        // Customer list is loaded, and is empty
         <div className='customer-list-empty'>No customers found. <Link to='/customers/new'>Create one</Link>.</div>
       )
     }
+  }
 
-    return this.props.customers.map(customer => {
-      // there are customers... render them.
-      return <CustomerRow customer={customer} key={customer._id} />
-    })
+  renderCustomers () {
+    const { customerListStatus, customers } = this.props
+    if (customerListStatus === 'success' && customers.length > 0) {
+      return this.props.customers.map(customer => {
+        // there are customers... render them.
+        return <CustomerRow customer={customer} key={customer._id} />
+      })
+    }
   }
 
   render () {
@@ -55,7 +52,6 @@ class Customers extends Component {
 
         <table className='customers'>
           <thead>
-          { this.renderCreateSuccessMessage() }
             <tr>
               <th>Customer/Company</th>
               <th>Email</th>
@@ -66,6 +62,8 @@ class Customers extends Component {
             { this.renderCustomers() }
           </tbody>
         </table>
+        { this.renderLoadingSpinner() }
+        { this.renderEmptyMessage() }
       </div>
     )
   }
@@ -74,14 +72,12 @@ class Customers extends Component {
 const mapStateToProps = state => {
   return {
     customerListStatus: state.customers.customerListStatus,
-    customerStatus: state.customers.status,
     customers: state.customers.customerList
   }
 }
 
 Customers.propTypes = {
   customerListStatus: PropTypes.string,
-  customerStatus: PropTypes.object,
   customers: PropTypes.array,
   fetchCustomers: PropTypes.func
 }

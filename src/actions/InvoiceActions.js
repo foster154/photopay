@@ -1,12 +1,17 @@
 import { API_URL } from './../constants.js'
 import axios from 'axios'
 import { browserHistory } from 'react-router'
+import { createNotification } from './NotificationActions'
 import {
   FETCH_INVOICES,
   FETCH_INVOICE,
-  SAVE_INVOICE,
+  SAVE_INVOICE_START,
+  SAVE_INVOICE_SUCCESS,
+  SAVE_INVOICE_FAIL,
   CREATE_CHARGE,
-  DELETE_INVOICE,
+  DELETE_INVOICE_START,
+  DELETE_INVOICE_SUCCESS,
+  DELETE_INVOICE_FAIL,
   CLEAR_INVOICE
 } from './types'
 
@@ -35,7 +40,7 @@ export function createInvoice ({
   }) {
   // console.log('Action creator params:', customer, invoiceNumber, lineItems, amount, shareUrl, displayShareLinkImmediately, paid)
   return function (dispatch) {
-    dispatch({ type: SAVE_INVOICE, payload: {status: 'start'} })
+    dispatch({ type: SAVE_INVOICE_START })
     axios({
       method: 'post',
       url: `${API_URL}/invoices`,
@@ -56,21 +61,14 @@ export function createInvoice ({
       headers: { authorization: window.localStorage.getItem('token') }
     })
     .then(response => {
-      dispatch({
-        type: SAVE_INVOICE,
-        payload: {status: 'success', message: 'Invoice created successfully'}
-      })
-      browserHistory.push('/invoices')
-      setTimeout(() => {
-        dispatch(clearInvoice())
-      }, 3000)
+      dispatch({ type: SAVE_INVOICE_SUCCESS }) // clears the Invoice status
+      browserHistory.push('/invoices')  // take user to invoices list
+      dispatch(createNotification({ message: 'Invoice created successfully', color: 'green', displayTime: 3 }))
     })
     .catch(error => {
       console.log(error)
-      dispatch({
-        type: SAVE_INVOICE,
-        payload: {status: 'error', message: 'There was a problem creating the invoice. Please try again.'}
-      })
+      dispatch({ type: SAVE_INVOICE_FAIL })
+      dispatch(createNotification({ message: 'There was a problem creating the invoice. Please try again.', color: 'red', displayTime: 4 }))
     })
   }
 }
@@ -87,7 +85,7 @@ export function fetchInvoice (id) {
   }
 }
 
-export function editInvoice ({
+export function updateInvoice ({
     id,
     customer,
     invoiceNumber,
@@ -98,7 +96,7 @@ export function editInvoice ({
     paid
   }) {
   return function (dispatch) {
-    dispatch({ type: SAVE_INVOICE, payload: {status: 'start'} })
+    dispatch({ type: SAVE_INVOICE_START })
     axios({
       method: 'put',
       url: `${API_URL}/invoices/${id}`,
@@ -118,18 +116,14 @@ export function editInvoice ({
       },
       headers: { authorization: window.localStorage.getItem('token') }
     })
-    .then(response => {
-      dispatch({
-        type: SAVE_INVOICE,
-        payload: {status: 'success', message: 'Invoice saved successfully'}
-      })
+    .then(() => {
+      dispatch({ type: SAVE_INVOICE_SUCCESS })
+      dispatch(createNotification({ message: 'Invoice saved successfully', color: 'green', displayTime: 3 }))
     })
     .catch(error => {
       console.log(error)
-      dispatch({
-        type: SAVE_INVOICE,
-        payload: {status: 'error', message: 'There was a problem saving the invoice. Please try again.'}
-      })
+      dispatch({ type: SAVE_INVOICE_FAIL })
+      dispatch(createNotification({ message: 'There was a problem saving the invoice. Please try again.', color: 'red', displayTime: 4 }))
     })
   }
 }
@@ -154,29 +148,19 @@ export function createCharge (token, id) {
 
 export function deleteInvoice (id) {
   return function (dispatch) {
-    dispatch({
-      type: DELETE_INVOICE,
-      payload: { status: 'start' }
-    })
+    dispatch({ type: DELETE_INVOICE_START })
     axios.delete(`${API_URL}/invoices/${id}`, {
       headers: { authorization: window.localStorage.getItem('token') }
     })
     .then(response => {
-      dispatch({
-        type: DELETE_INVOICE,
-        payload: { status: 'success', message: 'Invoice deleted.' }
-      })
+      dispatch({ type: DELETE_INVOICE_SUCCESS })
+      dispatch(createNotification({ message: 'Invoice deleted successfully', color: 'green', displayTime: 3 }))
       browserHistory.push('/invoices')
-      setTimeout(() => {
-        dispatch(clearInvoice())
-      }, 3000)
     })
     .catch(error => {
       console.log(error)
-      dispatch({
-        type: DELETE_INVOICE,
-        payload: { status: 'error', message: 'There was a problem deleting the invoice. Please try again.' }
-      })
+      dispatch({ type: DELETE_INVOICE_FAIL })
+      dispatch(createNotification({ message: 'An error occured, please try again.', color: 'red', displayTime: 4 }))
     })
   }
 }

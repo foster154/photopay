@@ -14,7 +14,7 @@ const INITIAL_STATE = {
   customerList: [],
   customerListStatus: '',
   customer: {},
-  status: {type: '', msg: ''}
+  saveStatus: null
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -27,14 +27,14 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, customerListStatus: 'error', customerList: [] }
     case FETCH_CUSTOMER:
       return { ...state, customer: action.payload }
+
     case SAVE_CUSTOMER_START:
-      return { ...state, status: {type: 'loading', msg: ''} }
+      return { ...state, saveStatus: 'loading' }
     case SAVE_CUSTOMER_SUCCESS:
-      return { ...state, status: {type: 'success', msg: action.payload} }
     case SAVE_CUSTOMER_FAIL:
-      return { ...state, status: {type: 'error', msg: action.payload} }
     case CUSTOMER_STATUS_RESET:
-      return { ...state, status: {type: '', msg: ''} }
+      return { ...state, saveStatus: null }
+
     case CLEAR_CUSTOMER_FORM:
       return { ...state, customer: {} }
   }

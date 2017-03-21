@@ -3,12 +3,21 @@ export const AUTH_USER = 'auth_user'
 export const UNAUTH_USER = 'unauth_user'
 export const AUTH_ERROR = 'auth_error'
 
-// Invoices
+// Invoicing
+
 export const FETCH_INVOICES = 'fetch_invoices'
 export const FETCH_INVOICE = 'fetch_invoice'
-export const SAVE_INVOICE = 'SAVE_INVOICE'
+
+export const SAVE_INVOICE_START = 'SAVE_INVOICE_START'
+export const SAVE_INVOICE_SUCCESS = 'SAVE_INVOICE_SUCCESS'
+export const SAVE_INVOICE_FAIL = 'SAVE_INVOICE_FAIL'
+
 export const CREATE_CHARGE = 'create_charge'
-export const DELETE_INVOICE = 'DELETE_INVOICE'
+
+export const DELETE_INVOICE_START = 'DELETE_INVOICE_START'
+export const DELETE_INVOICE_SUCCESS = 'DELETE_INVOICE_SUCCESS'
+export const DELETE_INVOICE_FAIL = 'DELETE_INVOICE_FAIL'
+
 export const CLEAR_INVOICE = 'CLEAR_INVOICE'
 
 // Customers
@@ -24,3 +33,7 @@ export const SAVE_CUSTOMER_FAIL = 'CREATE_CUSTOMER_FAIL'
 export const CUSTOMER_STATUS_RESET = 'CREATE_CUSTOMER_RESET'
 
 export const CLEAR_CUSTOMER_FORM = 'CLEAR_CUSTOMER_FORM'
+
+// Notifications
+export const CREATE_NOTIFICATON = 'CREATE_NOTIFICATON'
+export const CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION'

@@ -1,6 +1,7 @@
 import { API_URL } from './../constants.js'
 import axios from 'axios'
 import { browserHistory } from 'react-router'
+import { createNotification } from './NotificationActions'
 import {
   FETCH_CUSTOMERS_START,
   FETCH_CUSTOMERS_SUCCESS,
@@ -15,10 +16,7 @@ import {
 
 export function fetchCustomers () {
   return function (dispatch) {
-    dispatch({
-      type: FETCH_CUSTOMERS_START,
-      payload: { status: 'start' }
-    })
+    dispatch({ type: FETCH_CUSTOMERS_START })
     axios.get(`${API_URL}/customers`, {
       headers: { authorization: window.localStorage.getItem('token') }
     })
@@ -61,21 +59,18 @@ export function createCustomer ({customerName, email, contactFirstName, contactL
       headers: { authorization: window.localStorage.getItem('token') }
     })
     .then(response => {
-      dispatch({
-        type: SAVE_CUSTOMER_SUCCESS,
-        payload: 'Customer created successfully'
-      })
+      dispatch({ type: SAVE_CUSTOMER_SUCCESS })
+      dispatch(createNotification({ message: 'Customer created successfully', color: 'green', displayTime: 3 }))
+
+      // onCreateSuccess is used to route user, depending on where they are.
+      // currently implemented in Customers page...
+      // built to be flexible for future ability to create customer on Invoice form page
       onCreateSuccess()
-      setTimeout(() => {
-        dispatch(customerStatusReset())
-      }, 3000)
     })
     .catch(error => {
       console.log(error)
-      dispatch({
-        type: SAVE_CUSTOMER_FAIL,
-        payload: 'There was a problem creating the customer. Please try again.'
-      })
+      dispatch({ type: SAVE_CUSTOMER_FAIL })
+      dispatch(createNotification({ message: 'Error creating customer, please try again.', color: 'red', displayTime: 4 }))
     })
   }
 }
@@ -87,21 +82,13 @@ export function updateCustomer ({ id, customerName, email, contactFirstName, con
       headers: { authorization: window.localStorage.getItem('token') }
     })
     .then(response => {
-      dispatch({
-        type: SAVE_CUSTOMER_SUCCESS,
-        payload: 'Customer saved successfully'
-      })
-      onSaveSuccess()
-      setTimeout(() => {
-        dispatch(customerStatusReset())
-      }, 3000)
+      dispatch({ type: SAVE_CUSTOMER_SUCCESS })
+      dispatch(createNotification({ message: 'Customer saved successfully', color: 'green', displayTime: 3 }))
     })
     .catch(error => {
       console.log(error)
-      dispatch({
-        type: SAVE_CUSTOMER_FAIL,
-        payload: 'There was a problem saving the customer. Please try again.'
-      })
+      dispatch({ type: SAVE_CUSTOMER_FAIL })
+      dispatch(createNotification({ message: 'Error saving customer, please try again.', color: 'red', displayTime: 4 }))
     })
   }
 }
@@ -112,21 +99,14 @@ export function deleteCustomer (id) {
       headers: { authorization: window.localStorage.getItem('token') }
     })
     .then(response => {
-      dispatch({
-        type: SAVE_CUSTOMER_SUCCESS,
-        payload: 'Customer deleted successfully'
-      })
+      dispatch({ type: SAVE_CUSTOMER_SUCCESS })
+      dispatch(createNotification({ message: 'Customer deleted successfully', color: 'green', displayTime: 3 }))
       browserHistory.push('/customers')
-      setTimeout(() => {
-        dispatch(customerStatusReset())
-      }, 3000)
     })
     .catch(error => {
       console.log(error)
-      dispatch({
-        type: SAVE_CUSTOMER_FAIL,
-        payload: 'There was a problem deleting the customer. Please try again.'
-      })
+      dispatch({ type: SAVE_CUSTOMER_FAIL })
+      dispatch(createNotification({ message: 'Error deleting customer, please try again.', color: 'red', displayTime: 4 }))
     })
   }
 }

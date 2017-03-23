@@ -47,10 +47,6 @@ export function createInvoice ({
       data: {
         invoiceNumber,
         customer,
-        billFrom: {
-          name: 'Panoractives',
-          email: 'info@panoractives.com'
-        },
         lineItems,
         shareUrl,
         invoiceSettings: {
@@ -129,7 +125,7 @@ export function updateInvoice ({
 }
 
 export function createCharge (token, id) {
-  console.log('action creator id', id)
+  console.log('createCharge action creator token & id', token, id)
   return function (dispatch) {
     axios({
       method: 'post',

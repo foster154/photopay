@@ -17,10 +17,15 @@ class CustomerSelect extends Component {
   }
 
   render () {
+    // if editing an existing invoice, the customer object has been populated,
+    // so customerId is in this.props.input.value._id
+    // if input has been changed/updated, customerId is in this.props.input.value
+    const value = this.props.input.value._id || this.props.input.value
+
     return (
       <Select
         {...this.props}
-        value={this.props.input.value || ''}
+        value={value}
         onBlur={() => this.props.input.onBlur(this.props.input.value)}
         onChange={this.onChange}
         options={this.props.options} // <-- Receive options from the form

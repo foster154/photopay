@@ -14,11 +14,7 @@ class InvoiceForm extends Component {
   }
 
   componentWillMount () {
-    // console.log('*** InvoiceForm props', this.props)
     this.props.fetchCustomers()
-    // if (this.props.routeParams.id) {
-    //   this.props.fetchInvoice(this.props.routeParams.id)
-    // }
   }
 
   handleFormSubmit (formProps) {
@@ -44,12 +40,10 @@ class InvoiceForm extends Component {
     contactFirstName ? label += contactFirstName : null
     contactLastName ? label += ' ' : null
     contactLastName ? label += contactLastName : null
-    // console.log({label})
     return label
   }
 
   calculateTotal () {
-    // console.log(this.props.lineItemValues)
     if (this.props.lineItemValues) {
       return this.props.lineItemValues.reduce((sum, lineItem) => {
         const amount = lineItem.amount
@@ -75,7 +69,10 @@ class InvoiceForm extends Component {
       customerOptions = this.props.customerList.map(function (customer) {
         return {
           value: customer._id,
-          label: `${customer.customerName} - ${customer.contactFirstName || ''} ${customer.contactLastName || ''}`
+          label: `
+            ${customer.customerName}
+            ${customer.contactFirstName || customer.contactLastName ? '-' : ''}
+            ${customer.contactFirstName || ''} ${customer.contactLastName || ''}`
         }
       })
     }
@@ -94,7 +91,6 @@ class InvoiceForm extends Component {
                 component={props =>
                   <CustomerSelect
                     {...props}
-                    // input={{value: this.state.initialValues.}}
                     options={customerOptions}
                     clearable={false}
                   />
@@ -153,14 +149,12 @@ const form = reduxForm({
 })
 
 InvoiceForm.propTypes = {
-  routeParams: PropTypes.object,
   onFormSubmit: PropTypes.func,
   customerList: PropTypes.array,      // mapStateToProps
   errorMessage: PropTypes.string,     // ?
   lineItemValues: PropTypes.array,    // Redux form
   handleSubmit: PropTypes.func,       // Redux form
   fetchCustomers: PropTypes.func,     // Redux action creator
-  fetchInvoice: PropTypes.func
 }
 
 export default connect(mapStateToProps, { createInvoice, fetchCustomers, fetchInvoice })(form(InvoiceForm))

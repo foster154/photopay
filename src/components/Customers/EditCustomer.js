@@ -38,16 +38,16 @@ class EditCustomer extends Component {
       <div className='delete-confirm-wrapper'>
         <div className='delete-confirm-text'>Are you sure? Deleting a customer cannot be undone.</div>
         <div
-          className='delete-confirm-link delete'
-          onClick={() => this.props.deleteCustomer(this.props.routeParams.id)}
-        >
-          Yes, Delete</div>
-        <div
           className='delete-confirm-link cancel'
           onClick={() => this.setState({showDeleteConfirm: false})}
         >
           Cancel
         </div>
+        <div
+          className='delete-confirm-link delete'
+          onClick={() => this.props.deleteCustomer(this.props.routeParams.id)}
+        >
+          Yes, Delete</div>
       </div>
     )
     : null

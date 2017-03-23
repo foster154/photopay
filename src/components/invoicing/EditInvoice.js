@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import InvoiceForm from './Form/InvoiceForm'
-import Notification from '../Shared/Notification'
 import { connect } from 'react-redux'
 import { browserHistory, Link } from 'react-router'
 import { fetchInvoice, updateInvoice, deleteInvoice } from '../../actions'
@@ -39,16 +38,16 @@ class EditInvoice extends Component {
       <div className='delete-confirm-wrapper'>
         <div className='delete-confirm-text'>Are you sure? Deleting an invoice cannot be undone.</div>
         <div
-          className='delete-confirm-link delete'
-          onClick={() => this.props.deleteInvoice(this.props.routeParams.id)}
-        >
-          Yes, Delete</div>
-        <div
           className='delete-confirm-link cancel'
           onClick={() => this.setState({showDeleteConfirm: false})}
         >
           Cancel
         </div>
+        <div
+          className='delete-confirm-link delete'
+          onClick={() => this.props.deleteInvoice(this.props.routeParams.id)}
+        >
+          Yes, Delete</div>
       </div>
     )
     : null

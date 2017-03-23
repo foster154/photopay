@@ -24,7 +24,7 @@ class SubmitPayment extends Component {
           token={this.onToken}
           stripeKey={process.env.STRIPE_PUBLISHABLE_KEY}
           amount={invoice.totalAmount * 100}
-          name={invoice.billFrom.name}
+          name='Panoractives'
           description={invoice.lineItems[0].item}
         >
           <button>

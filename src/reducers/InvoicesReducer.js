@@ -1,5 +1,6 @@
 import {
-  FETCH_INVOICES,
+  INVOICE_LIST_IS_LOADING,
+  INVOICE_LIST,
   FETCH_INVOICE,
   SAVE_INVOICE_START,
   SAVE_INVOICE_SUCCESS,
@@ -12,17 +13,18 @@ import {
 } from '../actions/types'
 
 const INITIAL_STATE = {
-  status: null,
-  message: null,
-  invoices: [],
+  invoiceList: [],
+  invoiceListIsLoading: false,
+  status: null,  // I want to refactor this. currently only used for create/edit
   invoice: {}
 }
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-
-    case FETCH_INVOICES:
-      return { ...state, invoices: action.payload }
+    case INVOICE_LIST_IS_LOADING:
+      return { ...state, invoiceListIsLoading: action.payload }
+    case INVOICE_LIST:
+      return { ...state, invoiceList: action.payload }
     case FETCH_INVOICE:
       return { ...state, invoice: action.payload }
 
@@ -40,7 +42,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, invoice: action.payload }
 
     case CLEAR_INVOICE:
-      return { ...state, status: null, message: null, invoice: {} }
+      return { ...state, status: null, invoice: {} }
   }
   return state
 }

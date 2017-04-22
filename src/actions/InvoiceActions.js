@@ -3,7 +3,8 @@ import axios from 'axios'
 import { browserHistory } from 'react-router'
 import { createNotification } from './NotificationActions'
 import {
-  FETCH_INVOICES,
+  INVOICE_LIST_IS_LOADING,
+  INVOICE_LIST,
   FETCH_INVOICE,
   SAVE_INVOICE_START,
   SAVE_INVOICE_SUCCESS,
@@ -15,23 +16,22 @@ import {
   CLEAR_INVOICE
 } from './types'
 
-export function fetchInvoices () {
-  return function (dispatch) {
+export const fetchInvoices = () => {
+  return dispatch => {
+    dispatch({ type: INVOICE_LIST_IS_LOADING, payload: true })
     axios.get(`${API_URL}/invoices`, {
       headers: { authorization: window.localStorage.getItem('token') }
     })
     .then(response => {
-      dispatch({
-        type: FETCH_INVOICES,
-        payload: response.data
-      })
+      dispatch({ type: INVOICE_LIST_IS_LOADING, payload: false })
+      dispatch({ type: INVOICE_LIST, payload: response.data })
     })
   }
 }
 
 export const fetchUserInvoiceNumber = () => {
   return dispatch => {
-    
+
   }
 }
 

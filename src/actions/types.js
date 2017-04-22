@@ -4,8 +4,8 @@ export const UNAUTH_USER = 'unauth_user'
 export const AUTH_ERROR = 'auth_error'
 
 // Invoicing
-
-export const FETCH_INVOICES = 'fetch_invoices'
+export const INVOICE_LIST_IS_LOADING = 'INVOICE_LIST_IS_LOADING'
+export const INVOICE_LIST = 'INVOICE_LIST'
 export const FETCH_INVOICE = 'fetch_invoice'
 
 export const SAVE_INVOICE_START = 'SAVE_INVOICE_START'

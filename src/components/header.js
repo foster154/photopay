@@ -15,6 +15,9 @@ class Header extends Component {
           <Link to='/customers'>Customers</Link>
         </li>,
         <li key={4}>
+          <Link to='/settings'>Settings</Link>
+        </li>,
+        <li key={5}>
           <Link to='/signout'>Sign Out</Link>
         </li>
       ]

@@ -4,13 +4,15 @@ import authReducer from './AuthReducer'
 import invoicesReducer from './InvoicesReducer'
 import customersReducer from './CustomersReducer'
 import notificationsReducer from './NotificationsReducer'
+import settingsReducer from './settingsReducer'
 
 const rootReducer = combineReducers({
   auth: authReducer,
   invoicing: invoicesReducer,
   customers: customersReducer,
   form: formReducer,
-  notifications: notificationsReducer
+  notifications: notificationsReducer,
+  settings: settingsReducer
 })
 
 export default rootReducer

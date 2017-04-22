@@ -27,6 +27,14 @@ a:hover {
 .float-right { float: right; }
 .float-left { float: left; }
 
+.page-wrapper {
+  position: relative;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 1200px;
+  max-width: 96%;
+}
+
 .msg-red {
   width: 100%;
   background-color: rgba(251, 87, 87, 0.46);
@@ -37,6 +45,9 @@ a:hover {
   margin-bottom: 15px;
 }
 
+
+// at some point, this should be removed.
+// now using _notifications.scss for alert/notification styling
 .alert-success {
   background-color: #62bf62;
   color: #f9f9f9;
@@ -47,6 +58,8 @@ a:hover {
   margin-bottom: 10px;
 }
 
+// at some point, this should be removed.
+// now using _notifications.scss for alert/notification styling
 .alert-error {
   background-color: #cc0000;
   color: #f9f9f9;

@@ -2,10 +2,11 @@ input[type="checkbox"], input[type="radio"] {
   margin-right: 6px;
 }
 
-form.photo-invoice-form {
+.photo-invoice-form {
   label {
     color: $dkGrey;
     font-weight: 600;
+    font-size: 0.9em;
   }
 
   .text-input {
@@ -13,7 +14,18 @@ form.photo-invoice-form {
     padding: 12px;
     border: 1px solid $accent;
     font-size: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     background-color: rgba(177, 219, 231, 0.07);
+  }
+
+  .text-input.with-subtext {
+    margin-bottom: 0;
+  }
+
+  .sub-input-text {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 12px;
+    color: #7d7d7d;
   }
 }

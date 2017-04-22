@@ -1,0 +1,30 @@
+@import './shared/variables';
+
+.settings-page {
+  position: relative;
+
+  .save-settings-btn {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    text-decoration: none;
+    margin: 10px 0;
+  }
+
+  .settings-block-section {
+    display: flex;
+    justify-content: space-between;
+
+    .settings-block {
+      background-color: white;
+      width: 48%;
+      padding: 20px;
+
+      h2 {
+        color: $accent;
+        font-size: 1.5em;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

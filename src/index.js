@@ -18,6 +18,7 @@ import EditInvoice from './components/Invoicing/EditInvoice'
 import Customers from './components/Customers/Customers'
 import CreateCustomer from './components/Customers/CreateCustomer'
 import EditCustomer from './components/Customers/EditCustomer'
+import SettingsPage from './components/Settings/SettingsPage'
 import reducers from './reducers'
 import { AUTH_USER } from './actions/types'
 
@@ -52,6 +53,7 @@ ReactDOM.render(
         <Route path='/customers' component={RequireAuth(Customers)} />
         <Route path='/customers/new' component={RequireAuth(CreateCustomer)} />
         <Route path='/customers/edit/:id' component={RequireAuth(EditCustomer)} />
+        <Route path='/settings' component={SettingsPage} />
       </Route>
 
       <Route path='/:id' component={InvoiceShow} />

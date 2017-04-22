@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { createInvoice, clearInvoice } from '../../actions'
+import { fetchUserInvoiceNumber, createInvoice, clearInvoice } from '../../actions'
 import InvoiceForm from './Form/InvoiceForm'
 import { browserHistory } from 'react-router'
 require('../../styles/invoicing/CreateEdit.scss')
@@ -8,6 +8,7 @@ require('../../styles/invoicing/CreateEdit.scss')
 class CreateInvoice extends Component {
   componentWillMount () {
     this.props.clearInvoice()
+    this.props.fetchUserInvoiceNumber()
   }
 
   renderNotifications () {
@@ -44,10 +45,11 @@ const mapStateToProps = state => {
 }
 
 CreateInvoice.propTypes = {
+  fetchUserInvoiceNumber: PropTypes.func,
   createInvoice: PropTypes.func,
   clearInvoice: PropTypes.func,
   status: PropTypes.string,
   message: PropTypes.string
 }
 
-export default connect(mapStateToProps, { createInvoice, clearInvoice })(CreateInvoice)
+export default connect(mapStateToProps, { fetchUserInvoiceNumber, createInvoice, clearInvoice })(CreateInvoice)

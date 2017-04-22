@@ -29,12 +29,6 @@ export const fetchInvoices = () => {
   }
 }
 
-export const fetchUserInvoiceNumber = () => {
-  return dispatch => {
-
-  }
-}
-
 export function createInvoice ({
     customer,
     invoiceNumber,

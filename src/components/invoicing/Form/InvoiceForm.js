@@ -135,9 +135,15 @@ class InvoiceForm extends Component {
 
 function mapStateToProps (state) {
   const selector = formValueSelector('invoiceForm')
+  const invoiceNumber = state.invoicing.invoice.invoiceNumber
+    ? state.invoicing.invoice.invoiceNumber
+    : state.settings.userSettings.currentInvoiceNumber
 
   return {
-    initialValues: state.invoicing.invoice,
+    initialValues: {
+      ...state.invoicing.invoice,
+      invoiceNumber: invoiceNumber
+    },
     customerList: state.customers.customerList,
     lineItemValues: selector(state, 'lineItems')
   }
@@ -154,7 +160,7 @@ InvoiceForm.propTypes = {
   errorMessage: PropTypes.string,     // ?
   lineItemValues: PropTypes.array,    // Redux form
   handleSubmit: PropTypes.func,       // Redux form
-  fetchCustomers: PropTypes.func,     // Redux action creator
+  fetchCustomers: PropTypes.func     // Redux action creator
 }
 
 export default connect(mapStateToProps, { createInvoice, fetchCustomers, fetchInvoice })(form(InvoiceForm))

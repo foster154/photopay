@@ -5,6 +5,7 @@ import { createInvoice, fetchCustomers, fetchInvoice } from '../../../actions'
 import CustomerSelect from './CustomerSelect'
 import { normalizeShareUrl } from './_normalize_share_url'
 import RenderItems from './_RenderItems'
+import PhotoUploader from './_PhotoUploader'
 require('../../../styles/invoicing/form.scss')
 
 class InvoiceForm extends Component {
@@ -125,6 +126,9 @@ class InvoiceForm extends Component {
             Mark invoice as paid
             <br />
           </fieldset>
+
+          <h2 className='text-center'>Sample Photos</h2>
+          <PhotoUploader />
 
           <button className='btn-primary clearfix save-invoice' action='submit'>Save Invoice</button>
         </form>
